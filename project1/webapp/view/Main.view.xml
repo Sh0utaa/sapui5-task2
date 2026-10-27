@@ -2,7 +2,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page title="Books">
-        <Table id="booksTable" items="{books>/Books}">
+        <Table id="booksTable" items="{books>/books}">
             <columns>
                 <Column><Text text="ID" /></Column>
                 <Column><Text text="Name" /></Column>
