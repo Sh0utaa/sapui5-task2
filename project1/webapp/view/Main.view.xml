@@ -2,7 +2,13 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page title="Books">
-        <Table id="booksTable" items="{books>/books}">
+        <Table id="booksTable" items="{books>/books}" mode="MultiSelect">
+            <headerToolbar>
+                <Toolbar >
+                    <Button text="Add Record" />
+                    <Button text="Delete Record" />
+                </Toolbar>
+            </headerToolbar>
             <columns>
                 <Column><Text text="ID" /></Column>
                 <Column><Text text="Name" /></Column>
