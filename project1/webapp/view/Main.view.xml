@@ -9,7 +9,6 @@
                     <Button text="{i18n>addRecord}" press=".onAddRecord" />
                     <Button text="{i18n>deleteRecord}" press=".onDeleteRecord" />
                     <ToolbarSeparator />
-                    <ToolbarSeparator />
                     <Input id="filterInput" placeholder="{i18n>nameFilter}" width="12rem" />
                     <Select id="genreFilter" selectedKey="all" >
                         <core:Item key="all" text="{i18n>allGenres}" />

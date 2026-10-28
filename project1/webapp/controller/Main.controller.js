@@ -60,7 +60,7 @@ sap.ui.define([
         },
 
         onAddRecord() {
-            const oModel = this.getView().getModel("books");
+            const oModel = this.getModel("books");
             const aBooks = oModel.getProperty("/books");
 
             const oNewBook = {
