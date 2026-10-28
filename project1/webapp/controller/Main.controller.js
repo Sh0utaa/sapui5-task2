@@ -12,48 +12,52 @@ sap.ui.define([
             const oModel = new JSONModel();
 
             oModel.setData({
-            books: [
-                {
-                    ID: "1",
-                    Name: "The Left Hand of Darkness",
-                    Author: "Ursula K. Le Guin",
-                    Genre: "Science Fiction",
-                    ReleaseDate: "1969-03-01",
-                    AvailableQuantity: 14
-                },
-                {
-                    ID: "2",
-                    Name: "Pride and Prejudice",
-                    Author: "Jane Austen",
-                    Genre: "Romance",
-                    ReleaseDate: "1813-01-28",
-                    AvailableQuantity: 3
-                },
-                {
-                    ID: "3",
-                    Name: "The Name of the Rose",
-                    Author: "Umberto Eco",
-                    Genre: "Historical Mystery",
-                    ReleaseDate: "1980-09-15",
-                    AvailableQuantity: 27
-                },
-                {
-                    ID: "4",
-                    Name: "Sapiens: A Brief History of Humankind",
-                    Author: "Yuval Noah Harari",
-                    Genre: "Non-fiction",
-                    ReleaseDate: "2011-06-04",
-                    AvailableQuantity: 0
-                },
-                {
-                    ID: "5",
-                    Name: "Neuromancer",
-                    Author: "William Gibson",
-                    Genre: "Cyberpunk",
-                    ReleaseDate: "1984-07-01",
-                    AvailableQuantity: 8
+                books: [
+                    {
+                        ID: "1",
+                        Name: "The Left Hand of Darkness",
+                        Author: "Ursula K. Le Guin",
+                        Genre: "Science Fiction",
+                        ReleaseDate: "1969-03-01",
+                        AvailableQuantity: 14
+                    },
+                    {
+                        ID: "2",
+                        Name: "Pride and Prejudice",
+                        Author: "Jane Austen",
+                        Genre: "Romance",
+                        ReleaseDate: "1813-01-28",
+                        AvailableQuantity: 3
+                    },
+                    {
+                        ID: "3",
+                        Name: "The Name of the Rose",
+                        Author: "Umberto Eco",
+                        Genre: "Historical Mystery",
+                        ReleaseDate: "1980-09-15",
+                        AvailableQuantity: 27
+                    },
+                    {
+                        ID: "4",
+                        Name: "Sapiens: A Brief History of Humankind",
+                        Author: "Yuval Noah Harari",
+                        Genre: "Non-fiction",
+                        ReleaseDate: "2011-06-04",
+                        AvailableQuantity: 0
+                    },
+                    {
+                        ID: "5",
+                        Name: "Neuromancer",
+                        Author: "William Gibson",
+                        Genre: "Cyberpunk",
+                        ReleaseDate: "1984-07-01",
+                        AvailableQuantity: 8
+                    }
+                ],
+                filter: {
+                    query: "",
+                    genre: "all"
                 }
-            ]
             });
         
             this.getView().setModel(oModel, "books");
@@ -93,8 +97,9 @@ sap.ui.define([
         },
 
         onFilter() {
-            const sQuery = this.byId("filterInput").getValue();
-            const sGenre = this.byId("genreFilter").getSelectedKey();
+            const oModel = this.getModel("books");
+            const sQuery = oModel.getProperty("/filter/query");
+            const sGenre = oModel.getProperty("/filter/genre");
             const aFilters = [];
 
             if (sQuery) {

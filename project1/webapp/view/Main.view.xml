@@ -9,8 +9,15 @@
                     <Button text="{i18n>addRecord}" press=".onAddRecord" />
                     <Button text="{i18n>deleteRecord}" press=".onDeleteRecord" />
                     <ToolbarSeparator />
-                    <Input id="filterInput" placeholder="{i18n>nameFilter}" width="12rem" />
-                    <Select id="genreFilter" selectedKey="all" >
+                    <Input 
+                      id="filterInput" 
+                      placeholder="{i18n>nameFilter}" 
+                      width="12rem" 
+                      value="{books>/filter/query}" 
+                      />
+                    <Select 
+                     id="genreFilter" 
+                     selectedKey="{books>/filter/genre}" >
                         <core:Item key="all" text="{i18n>allGenres}" />
                         <core:Item key="Science Fiction" text="{i18n>genreSciFi}" />
                         <core:Item key="Romance" text="{i18n>genreRomance}" />
@@ -18,7 +25,7 @@
                         <core:Item key="Non-Fiction" text="{i18n>genreNonFiction}" />
                         <core:Item key="Cyberpunk" text="{i18n>genreCyberpunk}" />
                     </Select>
-                    <Button text="{i18n>filter}" type="Emphasized" press="onFilter"></Button>
+                    <Button text="{i18n>filter}" type="Emphasized" press=".onFilter"></Button>
                 </Toolbar>
             </headerToolbar>
             <columns>
