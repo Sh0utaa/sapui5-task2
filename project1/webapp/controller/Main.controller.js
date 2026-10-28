@@ -54,6 +54,14 @@ sap.ui.define([
                         AvailableQuantity: 8
                     }
                 ],
+                genres: [
+                    { key: "all", name: "All Genres" },
+                    { key: "Science Fiction", name: "Science Fiction" },
+                    { key: "Romance", name: "Romance" },
+                    { key: "Historical Mystery", name: "Historical Mystery" },
+                    { key: "Non-Fiction", name: "Non-Fiction" },
+                    { key: "Cyberpunk", name: "Cyberpunk" }
+                ],
                 filter: {
                     query: "",
                     genre: "all"

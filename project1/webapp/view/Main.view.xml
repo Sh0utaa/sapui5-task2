@@ -15,15 +15,15 @@
                       width="12rem" 
                       value="{books>/filter/query}" 
                       />
-                    <Select 
-                     id="genreFilter" 
-                     selectedKey="{books>/filter/genre}" >
-                        <core:Item key="all" text="{i18n>allGenres}" />
-                        <core:Item key="Science Fiction" text="{i18n>genreSciFi}" />
-                        <core:Item key="Romance" text="{i18n>genreRomance}" />
-                        <core:Item key="Historical Mystery" text="{i18n>genreHistoricalMystery}" />
-                        <core:Item key="Non-Fiction" text="{i18n>genreNonFiction}" />
-                        <core:Item key="Cyberpunk" text="{i18n>genreCyberpunk}" />
+                    <Select
+                        id="genreFilter"
+                        selectedKey="{books>/filter/genre}"
+                        items="{books>/genres}">
+
+                        <core:Item
+                            key="{books>key}"
+                            text="{books>name}" />
+
                     </Select>
                     <Button text="{i18n>filter}" type="Emphasized" press=".onFilter"></Button>
                 </Toolbar>
