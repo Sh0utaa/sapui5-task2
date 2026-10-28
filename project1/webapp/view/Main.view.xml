@@ -19,6 +19,7 @@
                         <core:Item key="Non-Fiction" text="{i18n>genreNonFiction}" />
                         <core:Item key="Cyberpunk" text="{i18n>genreCyberpunk}" />
                     </Select>
+                    <Button text="{i18n>filter}" type="Emphasized" press="onFilter"></Button>
                 </Toolbar>
             </headerToolbar>
             <columns>

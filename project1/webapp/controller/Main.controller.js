@@ -92,12 +92,16 @@ sap.ui.define([
             oTable.removeSelections();
         },
 
-        onFilter(oEvent) {
-            const sQuery = oEvent.getParameter("value");
+        onFilter() {
+            const sQuery = this.byId("filterInput").getValue();
+            const sGenre = this.byId("genreFilter").getSelectedKey();
             const aFilters = [];
 
             if (sQuery) {
                 aFilters.push(new Filter("Name", FilterOperator.Contains, sQuery));
+            }
+            if (sGenre !== "all") {
+                aFilters.push(new Filter("Genre", FilterOperator.EQ, sGenre));
             }
 
             this.byId("booksTable").getBinding("items").filter(aFilters);
