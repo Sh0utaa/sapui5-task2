@@ -1,10 +1,10 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "project1/controller/BaseController",
     "sap/ui/model/json/JSONModel"
-], (Controller, JSONModel) => {
+], (BaseController, JSONModel) => {
     "use strict";
 
-    return Controller.extend("project1.controller.Main", {
+    return BaseController.extend("project1.controller.Main", {
         onInit() {
             const oModel = new JSONModel();
 
@@ -74,7 +74,8 @@ sap.ui.define([
         },
 
         onDeleteRecord() {
-            const oModel = this.getView().getModel("books");
+            // this.getModel method is from teh BaseController
+            const oModel = this.getModel("books");
             const aBooks = oModel.getProperty("/books");
             const oTable = this.byId("booksTable");
 
