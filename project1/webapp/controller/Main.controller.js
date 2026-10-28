@@ -54,6 +54,38 @@ sap.ui.define([
             });
         
             this.getView().setModel(oModel, "books");
+        },
+
+        onAddRecord() {
+            const oModel = this.getView().getModel("books");
+            const aBooks = oModel.getProperty("/books");
+
+            const oNewBook = {
+                ID: "",
+                Name: "",
+                Author: "",
+                Genre: "",
+                ReleaseDate: "",
+                AvailableQuantity: 0
+            };
+
+            aBooks.push(oNewBook);
+            oModel.setProperty("/books", aBooks);
+        },
+
+        onDeleteRecord() {
+            const oModel = this.getView().getModel("books");
+            const aBooks = oModel.getProperty("/books");
+            const oTable = this.byId("booksTable");
+
+            const aSelectedBooks = oTable.getSelectedItems().map(oItem =>
+                oItem.getBindingContext("books").getObject()
+            );
+
+            const aRemaining = aBooks.filter(oBook => !aSelectedBooks.includes(oBook));
+
+            oModel.setProperty("/books", aRemaining);
+            oTable.removeSelections();
         }
     });
 });

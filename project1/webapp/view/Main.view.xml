@@ -5,8 +5,8 @@
         <Table id="booksTable" items="{books>/books}" mode="MultiSelect">
             <headerToolbar>
                 <Toolbar >
-                    <Button text="Add Record" />
-                    <Button text="Delete Record" />
+                    <Button text="{i18n>addRecord}" press=".onAddRecord" />
+                    <Button text="{i18n>deleteRecord}" press=".onDeleteRecord" />
                 </Toolbar>
             </headerToolbar>
             <columns>
