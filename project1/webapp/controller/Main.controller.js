@@ -2,9 +2,9 @@ sap.ui.define([
     "project1/controller/BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
-
-], (BaseController, JSONModel, Filter, FilterOperator) => {
+    "sap/ui/model/FilterOperator",
+    "sap/m/MessageToast"
+], (BaseController, JSONModel, Filter, FilterOperator, MessageToast) => {
     "use strict";
 
     return BaseController.extend("project1.controller.Main", {
@@ -64,7 +64,8 @@ sap.ui.define([
                 ],
                 filter: {
                     query: "",
-                    genre: "all"
+                    genre: "all",
+                    enabled: false
                 }
             });
         
@@ -110,6 +111,11 @@ sap.ui.define([
             const sGenre = oModel.getProperty("/filter/genre");
             const aFilters = [];
 
+            if (!sQuery.trim() && sGenre === "all") {
+                MessageToast.show("Enter a book name or select a genre.");
+                return;
+            }
+
             if (sQuery) {
                 aFilters.push(new Filter("Name", FilterOperator.Contains, sQuery));
             }
@@ -118,6 +124,18 @@ sap.ui.define([
             }
 
             this.byId("booksTable").getBinding("items").filter(aFilters);
+        },
+
+        onFilterChange() {
+            const oModel = this.getModel("books");
+
+            const sQuery = oModel.getProperty("/filter/query").trim();
+            const sGenre = oModel.getProperty("/filter/genre");
+
+            oModel.setProperty(
+                "/filter/enabled",
+                sQuery !== "" || sGenre !== "all"
+            );
         }
     });
 });

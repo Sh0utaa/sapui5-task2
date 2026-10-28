@@ -9,23 +9,25 @@
                     <Button text="{i18n>addRecord}" press=".onAddRecord" />
                     <Button text="{i18n>deleteRecord}" press=".onDeleteRecord" />
                     <ToolbarSeparator />
-                    <Input 
-                      id="filterInput" 
-                      placeholder="{i18n>nameFilter}" 
-                      width="12rem" 
-                      value="{books>/filter/query}" 
-                      />
+                    <Input
+                        id="filterInput"
+                        placeholder="{i18n>nameFilter}"
+                        width="12rem"
+                        value="{books>/filter/query}"
+                        liveChange=".onFilterChange"
+                    />
                     <Select
                         id="genreFilter"
                         selectedKey="{books>/filter/genre}"
-                        items="{books>/genres}">
+                        items="{books>/genres}"
+                        change=".onFilterChange">
 
                         <core:Item
                             key="{books>key}"
                             text="{books>name}" />
 
                     </Select>
-                    <Button text="{i18n>filter}" type="Emphasized" press=".onFilter"></Button>
+                    <Button text="{i18n>filter}" type="Emphasized" press=".onFilter" enabled="{books>/filter/enabled}"></Button>
                 </Toolbar>
             </headerToolbar>
             <columns>
