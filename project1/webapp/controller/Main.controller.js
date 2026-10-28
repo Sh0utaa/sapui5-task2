@@ -1,7 +1,10 @@
 sap.ui.define([
     "project1/controller/BaseController",
-    "sap/ui/model/json/JSONModel"
-], (BaseController, JSONModel) => {
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+
+], (BaseController, JSONModel, Filter, FilterOperator) => {
     "use strict";
 
     return BaseController.extend("project1.controller.Main", {
@@ -87,6 +90,17 @@ sap.ui.define([
 
             oModel.setProperty("/books", aRemaining);
             oTable.removeSelections();
+        },
+
+        onFilter(oEvent) {
+            const sQuery = oEvent.getParameter("value");
+            const aFilters = [];
+
+            if (sQuery) {
+                aFilters.push(new Filter("Name", FilterOperator.Contains, sQuery));
+            }
+
+            this.byId("booksTable").getBinding("items").filter(aFilters);
         }
     });
 });

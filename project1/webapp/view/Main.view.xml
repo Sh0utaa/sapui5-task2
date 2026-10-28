@@ -7,6 +7,17 @@
                 <Toolbar >
                     <Button text="{i18n>addRecord}" press=".onAddRecord" />
                     <Button text="{i18n>deleteRecord}" press=".onDeleteRecord" />
+                    <ToolbarSeparator />
+                    <ToolbarSeparator />
+                    <Input id="filterInput" placeholder="{i18n>nameFilter}" width="12rem" liveChange=".onFilter" />
+                    <!-- <Select id="genreFilter" selectedKey="all" change=".onFilter">
+                        <core:Item key="all" text="{i18n>allGenres}" />
+                        <core:Item key="Science Fiction" text="{i18n>genreSciFi}" />
+                        <core:Item key="Romance" text="{i18n>genreRomance}" />
+                        <core:Item key="Historical Mystery" text="{i18n>genreHistoricalMystery}" />
+                        <core:Item key="Non-Fiction" text="{i18n>genreNonFiction}" />
+                        <core:Item key="Cyberpunk" text="{i18n>genreCyberpunk}" />
+                    </Select> -->
                 </Toolbar>
             </headerToolbar>
             <columns>
