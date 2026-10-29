@@ -3,7 +3,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page title="Books">
-        <Table id="booksTable" items="{books>/books}" mode="MultiSelect">
+        <Table id="booksTable" items="{books>/books}" mode="MultiSelect" selectionChange=".onSelectionChange">
             <headerToolbar>
                 <Toolbar >
                     <Button text="{i18n>addRecord}" press=".onAddRecord" />

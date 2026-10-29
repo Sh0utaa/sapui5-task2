@@ -93,6 +93,14 @@ sap.ui.define([
             const aBooks = oModel.getProperty("/books");
             const oTable = this.byId("booksTable");
 
+            // message toast showing up if there's nothing selected (overridden by disabled button)
+            const aSelectedItems = oTable.getSelectedItems();
+
+            if (aSelectedItems.length === 0) {
+                MessageToast.show(this.getResourceBundle().getText("selectRecordFirst"));
+                return;
+            }
+
             const aSelectedBooks = oTable.getSelectedItems().map(oItem =>
                 oItem.getBindingContext("books").getObject()
             );
@@ -102,6 +110,7 @@ sap.ui.define([
             oModel.setProperty("/books", aRemaining);
             oTable.removeSelections();
 
+            oModel.setProperty("/document/hasSelected", false);
             this._updateGenres();
         },
 
@@ -133,6 +142,11 @@ sap.ui.define([
             aGenres.unshift({ key: "all", name: oBundle.getText("allGenres") });
 
             oModel.setProperty("/genres", aGenres);
+        },
+
+        onSelectionChange() {
+            const bHasSelected = this.byId("booksTable").getSelectedItems().length > 0;
+            this.getModel("books").setProperty("/document/hasSelected", bHasSelected);
         }
     });
 });
