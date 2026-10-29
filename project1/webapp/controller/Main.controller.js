@@ -54,22 +54,18 @@ sap.ui.define([
                         AvailableQuantity: 8
                     }
                 ],
-                genres: [
-                    { key: "all", name: "All Genres" },
-                    { key: "Science Fiction", name: "Science Fiction" },
-                    { key: "Romance", name: "Romance" },
-                    { key: "Historical Mystery", name: "Historical Mystery" },
-                    { key: "Non-Fiction", name: "Non-Fiction" },
-                    { key: "Cyberpunk", name: "Cyberpunk" }
-                ],
+                document: {
+                    hasSelected: false
+                },
                 filter: {
                     query: "",
-                    genre: "all",
-                    enabled: false
+                    genre: "all"
                 }
             });
         
             this.getView().setModel(oModel, "books");
+
+            this._updateGenres();
         },
 
         onAddRecord() {
@@ -87,6 +83,8 @@ sap.ui.define([
 
             aBooks.push(oNewBook);
             oModel.setProperty("/books", aBooks);
+
+            this._updateGenres();
         },
 
         onDeleteRecord() {
@@ -103,6 +101,8 @@ sap.ui.define([
 
             oModel.setProperty("/books", aRemaining);
             oTable.removeSelections();
+
+            this._updateGenres();
         },
 
         onFilter() {
@@ -110,11 +110,6 @@ sap.ui.define([
             const sQuery = oModel.getProperty("/filter/query");
             const sGenre = oModel.getProperty("/filter/genre");
             const aFilters = [];
-
-            if (!sQuery.trim() && sGenre === "all") {
-                MessageToast.show("Enter a book name or select a genre.");
-                return;
-            }
 
             if (sQuery) {
                 aFilters.push(new Filter("Name", FilterOperator.Contains, sQuery));
@@ -126,16 +121,18 @@ sap.ui.define([
             this.byId("booksTable").getBinding("items").filter(aFilters);
         },
 
-        onFilterChange() {
+        _updateGenres() {
             const oModel = this.getModel("books");
+            const aBooks = oModel.getProperty("/books");
 
-            const sQuery = oModel.getProperty("/filter/query").trim();
-            const sGenre = oModel.getProperty("/filter/genre");
+            const aGenres = [...new Set(aBooks.map(oBook => oBook.Genre))]
+                .sort()
+                .map(sGenre => ({ key: sGenre, name: sGenre }));
 
-            oModel.setProperty(
-                "/filter/enabled",
-                sQuery !== "" || sGenre !== "all"
-            );
+            const oBundle = this.getResourceBundle();
+            aGenres.unshift({ key: "all", name: oBundle.getText("allGenres") });
+
+            oModel.setProperty("/genres", aGenres);
         }
     });
 });

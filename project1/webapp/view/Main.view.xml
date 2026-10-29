@@ -7,7 +7,9 @@
             <headerToolbar>
                 <Toolbar >
                     <Button text="{i18n>addRecord}" press=".onAddRecord" />
-                    <Button text="{i18n>deleteRecord}" press=".onDeleteRecord" />
+                    <Button text="{i18n>deleteRecord}" 
+                        press=".onDeleteRecord" 
+                        enabled="{books>/document/hasSelected}" />
                     <ToolbarSeparator />
                     <Input
                         id="filterInput"
@@ -19,15 +21,10 @@
                     <Select
                         id="genreFilter"
                         selectedKey="{books>/filter/genre}"
-                        items="{books>/genres}"
-                        change=".onFilterChange">
-
-                        <core:Item
-                            key="{books>key}"
-                            text="{books>name}" />
-
+                        items="{books>/genres}">
+                        <core:Item key="{books>key}" text="{books>name}" />
                     </Select>
-                    <Button text="{i18n>filter}" type="Emphasized" press=".onFilter" enabled="{books>/filter/enabled}"></Button>
+                    <Button text="{i18n>filter}" type="Emphasized" press=".onFilter"></Button>
                 </Toolbar>
             </headerToolbar>
             <columns>
