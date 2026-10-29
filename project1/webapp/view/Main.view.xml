@@ -33,13 +33,17 @@
                 <Column><Text text="Author" /></Column>
                 <Column><Text text="Genre" /></Column>
                 <Column><Text text="Release Date" /></Column>
-                <Column hAlign="End"><Text text="Available" /></Column>
+                <Column><Text text="Available" /></Column>
+                <Column hAlign="End"><Text text="Actions" /></Column>
             </columns>
             <items>
                 <ColumnListItem>
                     <cells>
                         <Text text="{books>ID}" />
-                        <Text text="{books>Name}" />
+                        <HBox>
+                            <Text  text="{books>Name}"  visible="{= !${books>editMode} }" />
+                            <Input value="{books>Name}" visible="{= !!${books>editMode} }" />
+                        </HBox>
                         <Text text="{books>Author}" />
                         <Text text="{books>Genre}" />
                         <Text text="{
@@ -51,6 +55,10 @@
                             }
                         }" />
                         <ObjectNumber number="{books>AvailableQuantity}" />
+                        <Button
+                            text="{= ${books>editMode} ? 'Save' : 'Edit Title' }"
+                            press=".onEditTitle" 
+                            type="Emphasized"/>
                     </cells>
                 </ColumnListItem>
             </items>
