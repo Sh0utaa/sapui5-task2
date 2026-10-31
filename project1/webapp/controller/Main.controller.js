@@ -149,8 +149,16 @@ sap.ui.define([
             this.getModel("books").setProperty("/document/hasSelected", bHasSelected);
         },
 
-        onEditTitle: function (oEvent) {
-            this.toggleEditMode(oEvent, "books");
-        }
+        onEditTitle(oEvent) {
+            const oContext = oEvent.getSource().getBindingContext("books");
+            const oModel = oContext.getModel();
+            const sPath = oContext.getPath() + "/editMode";
+
+            const oProp = oModel.getProperty(sPath);
+
+            oModel.setProperty(sPath, oProp === undefined || oProp === false ? true : false);
+
+            console.log(oContext.getObject());
+        } 
     });
 });

@@ -30,20 +30,26 @@
             <columns>
                 <Column><Text text="{i18n>columnId}" /></Column>
                 <Column><Text text="{i18n>columnName}" /></Column>
+                <Column><Text text="{i18n>columnActions}" ></Text></Column>
                 <Column><Text text="{i18n>columnAuthor}" /></Column>
                 <Column><Text text="{i18n>columnGenre}" /></Column>
                 <Column><Text text="{i18n>columnReleaseDate}" /></Column>
-                <Column><Text text="{i18n>columnAvailable}" /></Column>
-                <Column hAlign="End"><Text text="{i18n>columnActions}" /></Column>
+                <Column hAlign="End"><Text text="{i18n>columnAvailable}" /></Column>
             </columns>
             <items>
                 <ColumnListItem>
                     <cells>
                         <Text text="{books>ID}" />
+
                         <HBox>
-                            <Text  text="{books>Name}"  visible="{= !${books>editMode} }" />
-                            <Input value="{books>Name}" visible="{= !!${books>editMode} }" />
-                        </HBox>
+                            <Text visible="{= !${books>editMode}}" text="{books>Name}" />
+                            <Input visible="{= ${books>editMode} === true}" value="{books>Name}" />
+                        </HBox >
+
+                        <Button text="{= !${books>editMode} ? 'Edit Title' : 'Save' }" 
+                            press=".onEditTitle" 
+                        ></Button>
+
                         <Text text="{books>Author}" />
                         <Text text="{books>Genre}" />
                         <Text text="{
@@ -55,10 +61,6 @@
                             }
                         }" />
                         <ObjectNumber number="{books>AvailableQuantity}" />
-                        <Button
-                            text="{= ${books>editMode} ? 'Save' : 'Edit Title' }"
-                            press=".onEditTitle" 
-                            type="Emphasized"/>
                     </cells>
                 </ColumnListItem>
             </items>
