@@ -2,7 +2,7 @@
     xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page title="Books">
+    <Page title="{i18n>pageTitle}">
         <Table id="booksTable" items="{books>/books}" mode="MultiSelect" selectionChange=".onSelectionChange">
             <headerToolbar>
                 <Toolbar >
@@ -28,18 +28,28 @@
                 </Toolbar>
             </headerToolbar>
             <columns>
-                <Column><Text text="ID" /></Column>
-                <Column><Text text="Name" /></Column>
-                <Column><Text text="Author" /></Column>
-                <Column><Text text="Genre" /></Column>
-                <Column><Text text="Release Date" /></Column>
-                <Column hAlign="End"><Text text="Available" /></Column>
+                <Column><Text text="{i18n>columnId}" /></Column>
+                <Column><Text text="{i18n>columnName}" /></Column>
+                <Column><Text text="{i18n>columnActions}" ></Text></Column>
+                <Column><Text text="{i18n>columnAuthor}" /></Column>
+                <Column><Text text="{i18n>columnGenre}" /></Column>
+                <Column><Text text="{i18n>columnReleaseDate}" /></Column>
+                <Column hAlign="End"><Text text="{i18n>columnAvailable}" /></Column>
             </columns>
             <items>
                 <ColumnListItem>
                     <cells>
                         <Text text="{books>ID}" />
-                        <Text text="{books>Name}" />
+
+                        <HBox>
+                            <Text visible="{= !${books>editMode}}" text="{books>Name}" />
+                            <Input visible="{= ${books>editMode} === true}" value="{books>Name}" />
+                        </HBox >
+
+                        <Button text="{= !${books>editMode} ? 'Edit Title' : 'Save' }" 
+                            press=".onEditTitle" 
+                        ></Button>
+
                         <Text text="{books>Author}" />
                         <Text text="{books>Genre}" />
                         <Text text="{
