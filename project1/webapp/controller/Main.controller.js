@@ -117,9 +117,10 @@ sap.ui.define([
 
         onConfirmationMessageBoxPress () {
             MessageBox.confirm("Are you sure you want to delete selected records?", {
-                actions: [MessageBox.Action.YES, MessageBox.Action.CANCEL],
+                emphasizedAction: MessageBox.Action.OK,
+                icon: MessageBox.Icon.WARNING,
                 onClose: (sAction) => {
-                    if (sAction === MessageBox.Action.YES) {
+                    if (sAction === MessageBox.Action.OK) {
                         this.onDeleteRecord();
                     }
                 }
