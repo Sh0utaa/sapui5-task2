@@ -3,8 +3,9 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-    "sap/m/MessageToast"
-], (BaseController, JSONModel, Filter, FilterOperator, MessageToast) => {
+    "sap/m/MessageToast",
+    "sap/m/MessageBox"
+], (BaseController, JSONModel, Filter, FilterOperator, MessageToast, MessageBox) => {
     "use strict";
 
     return BaseController.extend("project1.controller.Main", {
@@ -112,6 +113,17 @@ sap.ui.define([
 
             oModel.setProperty("/document/hasSelected", false);
             this._updateGenres();
+        },
+
+        onConfirmationMessageBoxPress () {
+            MessageBox.confirm("Are you sure you want to delete selected records?", {
+                actions: [MessageBox.Action.YES, MessageBox.Action.CANCEL],
+                onClose: (sAction) => {
+                    if (sAction === MessageBox.Action.YES) {
+                        this.onDeleteRecord();
+                    }
+                }
+            });
         },
 
         onFilter() {

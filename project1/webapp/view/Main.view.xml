@@ -8,7 +8,7 @@
                 <Toolbar >
                     <Button text="{i18n>addRecord}" press=".onAddRecord" />
                     <Button text="{i18n>deleteRecord}" 
-                        press=".onDeleteRecord" 
+                        press=".onConfirmationMessageBoxPress" 
                         enabled="{books>/document/hasSelected}" />
                     <ToolbarSeparator />
                     <Input
