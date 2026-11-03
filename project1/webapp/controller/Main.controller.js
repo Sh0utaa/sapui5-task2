@@ -116,6 +116,12 @@ sap.ui.define([
                 return;
             }
 
+            let dateArray = releaseDate.split("-");
+            if(dateArray[0].length !== 4 || dateArray[1].length !== 2 || dateArray[2].length !== 2) {
+                MessageBox.error("Please put in a valid date.");
+                return;
+            }
+
             if(availableQuantity < 0) {
                 MessageBox.error("Quantity cannot be less than 0");
                 return;
