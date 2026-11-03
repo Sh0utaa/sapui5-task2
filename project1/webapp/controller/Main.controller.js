@@ -4,23 +4,15 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/MessageToast",
-    "sap/m/MessageBox",
-    "sap/m/Dialog",
-    "sap/m/Button",
-    "sap/m/library"
+    "sap/m/MessageBox"
 ], (BaseController, 
     JSONModel, 
     Filter, 
     FilterOperator, 
     MessageToast, 
-    MessageBox, 
-    Dialog, 
-    Button, 
-    mobileLibrary
+    MessageBox
     ) => {
     "use strict";
-
-    const ButtonType = mobileLibrary.ButtonType;
 
     return BaseController.extend("project1.controller.Main", {
         onInit() {
@@ -75,6 +67,13 @@ sap.ui.define([
                 filter: {
                     query: "",
                     genre: "all"
+                },
+                addRecordForm: {
+                    name: "",
+                    author: "",
+                    genre: "",
+                    releaseDate: "",
+                    availableQuantity: 0
                 }
             });
         
@@ -83,7 +82,7 @@ sap.ui.define([
             this._updateGenres();
         },
 
-        _onAddRecord() {
+        onAddRecord() {
             const oModel = this.getModel("books");
             const aBooks = oModel.getProperty("/books");
 
@@ -100,6 +99,7 @@ sap.ui.define([
             oModel.setProperty("/books", aBooks);
 
             this._updateGenres();
+            this.onCloseRecordDialog();
         },
         
         async onAddRecordDialogPress() {
