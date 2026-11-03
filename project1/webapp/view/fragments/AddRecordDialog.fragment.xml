@@ -1,20 +1,20 @@
 <Dialog xmlns="sap.m" xmlns:f="sap.ui.layout.form" title="{i18n>addRecordTitle}" contentWidth="28rem">
     <content>
-        <f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" columnsXL="1" columnsL="1" columnsM="1">
-            <Label text="Name" required="true"/>
+        <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+            <Label text="Name" />
                 <Input value="{books>/addRecordForm/name}" placeholder="Enter book name"/>
-            <Label text="Author" required="true"/>
+            <Label text="Author" />
                 <Input value="{books>/addRecordForm/author}" placeholder="Enter author name"/>
             <Label text="Genre"/>
                 <Input value="{books>/addRecordForm/genre}" placeholder="For example: Science Fiction"/>
             <Label text="Release date"/>
-                <DatePicker value="{books>/addRecordForm/releaseDate}" valueFormat="yyyy-MM-dd" displayFormat="medium"/>
+                <DatePicker value="{books>/addRecordForm/releaseDate}" valueFormat="dd-MM-yyyy" displayFormat="medium"/>
             <Label text="Available quantity"/>
                 <Input value="{books>/addRecordForm/availableQuantity}" type="Number"/>
         </f:SimpleForm>
     </content>
     <buttons>
-        <Button text="{i18n>save}" type="Emphasized" press=".onAddRecord"/>
+        <Button text="{i18n>add}" type="Emphasized" press=".onAddRecord"/>
         <Button text="{i18n>cancel}" press=".onCloseRecordDialog"/>
     </buttons>
 </Dialog>

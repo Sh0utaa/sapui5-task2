@@ -69,11 +69,11 @@ sap.ui.define([
                     genre: "all"
                 },
                 addRecordForm: {
-                    name: "",
-                    author: "",
-                    genre: "",
-                    releaseDate: "",
-                    availableQuantity: 0
+                    name: "The Hunger Games",
+                    author: "Suzanne Collins",
+                    genre: "Science Fiction",
+                    releaseDate: "14-09-2008",
+                    availableQuantity: 67
                 }
             });
         
@@ -86,20 +86,23 @@ sap.ui.define([
             const oModel = this.getModel("books");
             const aBooks = oModel.getProperty("/books");
 
+            const oUserRecord = oModel.getProperty("/addRecordForm");
+
             const oNewBook = {
-                ID: "",
-                Name: "",
-                Author: "",
-                Genre: "",
-                ReleaseDate: "",
-                AvailableQuantity: 0
+                ID: Math.floor(Math.random() * 99) + 10,
+                Name: oUserRecord.name,
+                Author: oUserRecord.author,
+                Genre: oUserRecord.genre,
+                ReleaseDate: oUserRecord.releaseDate,
+                AvailableQuantity: oUserRecord.availableQuantity
             };
 
             aBooks.push(oNewBook);
             oModel.setProperty("/books", aBooks);
 
             this._updateGenres();
-            this.onCloseRecordDialog();
+
+            if(this.oRecordDialog) this.oRecordDialog.close();
         },
         
         async onAddRecordDialogPress() {
