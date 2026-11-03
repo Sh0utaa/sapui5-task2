@@ -7,8 +7,14 @@
                 <Input value="{books>/addRecordForm/author}" placeholder="Enter author name"/>
             <Label text="Genre"/>
                 <Input value="{books>/addRecordForm/genre}" placeholder="For example: Science Fiction"/>
-            <Label text="Release date"/>
-                <DatePicker value="{books>/addRecordForm/releaseDate}" valueFormat="dd-MM-yyyy" displayFormat="medium"/>
+            <Label text="Release date" />
+                <DatePicker
+                    id="releaseDatePicker"
+                    value="{books>/addRecordForm/releaseDate}"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="yyyy-MM-dd"
+                    strictParsing="true"
+                    change=".onReleaseDateChange" />
             <Label text="Available quantity"/>
                 <Input value="{books>/addRecordForm/availableQuantity}" type="Number"/>
         </f:SimpleForm>

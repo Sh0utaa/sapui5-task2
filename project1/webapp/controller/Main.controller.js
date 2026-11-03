@@ -69,11 +69,11 @@ sap.ui.define([
                     genre: "all"
                 },
                 addRecordForm: {
-                    name: "The Hunger Games",
-                    author: "Suzanne Collins",
-                    genre: "Science Fiction",
-                    releaseDate: "14-09-2008",
-                    availableQuantity: 67
+                    name: "",
+                    author: "",
+                    genre: "",
+                    releaseDate: "",
+                    availableQuantity: 0
                 }
             });
         
@@ -87,14 +87,47 @@ sap.ui.define([
             const aBooks = oModel.getProperty("/books");
 
             const oUserRecord = oModel.getProperty("/addRecordForm");
+            const name = oUserRecord.name?.trim();
+            const author = oUserRecord.author?.trim();
+            const genre = oUserRecord.genre?.trim();
+            const releaseDate = oUserRecord.releaseDate;
+            const availableQuantity = oUserRecord.availableQuantity;
+
+           console.log("release date: " + releaseDate); 
+
+            // form validation
+            if (!name || !author || !genre || !releaseDate) {
+                MessageBox.error("Please do not leave any fields empty.");
+                return;
+            }
+
+            if (name.length < 3 || name.length > 50) {
+                MessageBox.error("Book name must be between 3 and 50 characters.");
+                return;
+            }
+
+            if (author.length < 3 || author.length > 50) {
+                MessageBox.error("Author name must be between 3 and 50 characters.");
+                return;
+            }
+
+            if(isNaN(new Date(releaseDate).getTime())) {
+                MessageBox.error("Please put in a valid date.");
+                return;
+            }
+
+            if(availableQuantity < 0) {
+                MessageBox.error("Quantity cannot be less than 0");
+                return;
+            }
 
             const oNewBook = {
-                ID: Math.floor(Math.random() * 99) + 10,
-                Name: oUserRecord.name,
-                Author: oUserRecord.author,
-                Genre: oUserRecord.genre,
-                ReleaseDate: oUserRecord.releaseDate,
-                AvailableQuantity: oUserRecord.availableQuantity
+                ID: Math.floor(Math.random() * 90) + 10,
+                Name: name,
+                Author: author,
+                Genre: genre,
+                ReleaseDate: releaseDate,
+                AvailableQuantity: availableQuantity
             };
 
             aBooks.push(oNewBook);
