@@ -4,9 +4,23 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/MessageToast",
-    "sap/m/MessageBox"
-], (BaseController, JSONModel, Filter, FilterOperator, MessageToast, MessageBox) => {
+    "sap/m/MessageBox",
+    "sap/m/Dialog",
+    "sap/m/Button",
+    "sap/m/library"
+], (BaseController, 
+    JSONModel, 
+    Filter, 
+    FilterOperator, 
+    MessageToast, 
+    MessageBox, 
+    Dialog, 
+    Button, 
+    mobileLibrary
+    ) => {
     "use strict";
+
+    const ButtonType = mobileLibrary.ButtonType;
 
     return BaseController.extend("project1.controller.Main", {
         onInit() {
@@ -69,7 +83,7 @@ sap.ui.define([
             this._updateGenres();
         },
 
-        onAddRecord() {
+        _onAddRecord() {
             const oModel = this.getModel("books");
             const aBooks = oModel.getProperty("/books");
 
@@ -86,6 +100,17 @@ sap.ui.define([
             oModel.setProperty("/books", aBooks);
 
             this._updateGenres();
+        },
+        
+        async onAddRecordDialogPress() {
+            this.oRecordDialog ??= await this.loadFragment({
+                name: "project1.view.fragments.AddRecordDialog"
+            });
+            this.oRecordDialog.open();
+        },
+
+        onCloseRecordDialog() {
+            if(this.oRecordDialog) this.oRecordDialog.close();
         },
 
         onDeleteRecord() {

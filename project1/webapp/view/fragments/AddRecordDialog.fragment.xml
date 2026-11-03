@@ -1,0 +1,6 @@
+<Dialog xmlns="sap.m" title="{i18n>addRecordTitle}">
+    <buttons>
+        <Button text="{i18n>save}" type="Emphasized" />
+        <Button text="{i18n>cancel}" press=".onCloseRecordDialog" />
+    </buttons>
+</Dialog>
