@@ -69,10 +69,6 @@ sap.ui.define([
                     genre: "all"
                 },
                 addRecordForm: {
-                    name: "",
-                    author: "",
-                    genre: "",
-                    releaseDate: "",
                     availableQuantity: 0
                 }
             });
@@ -93,7 +89,7 @@ sap.ui.define([
             const releaseDate = oUserRecord.releaseDate;
             const availableQuantity = oUserRecord.availableQuantity;
 
-           console.log("release date: " + releaseDate); 
+            const oDP = this.byId("releaseDatePicker");
 
             // form validation
             if (!name || !author || !genre || !releaseDate) {
@@ -111,14 +107,8 @@ sap.ui.define([
                 return;
             }
 
-            if(isNaN(new Date(releaseDate).getTime())) {
-                MessageBox.error("Please put in a valid date.");
-                return;
-            }
-
-            let dateArray = releaseDate.split("-");
-            if(dateArray[0].length !== 4 || dateArray[1].length !== 2 || dateArray[2].length !== 2) {
-                MessageBox.error("Please put in a valid date.");
+            if(!oDP.isValidValue() || releaseDate.length === 0) {
+                MessageBox.error("Please provide a valid date.");
                 return;
             }
 
@@ -138,6 +128,7 @@ sap.ui.define([
 
             aBooks.push(oNewBook);
             oModel.setProperty("/books", aBooks);
+            oModel.setProperty("/addRecordForm", {availableQuantity: 0});
 
             this._updateGenres();
 
@@ -238,7 +229,6 @@ sap.ui.define([
 
             oModel.setProperty(sPath, oProp === undefined || oProp === false ? true : false);
 
-            console.log(oContext.getObject());
         } 
     });
 });
