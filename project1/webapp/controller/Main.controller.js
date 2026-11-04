@@ -132,7 +132,7 @@ sap.ui.define([
 
             this._updateGenres();
 
-            if(this.oRecordDialog) this.oRecordDialog.close();
+            this.oRecordDialog.close();
         },
         
         async onAddRecordDialogPress() {
@@ -143,7 +143,7 @@ sap.ui.define([
         },
 
         onCloseRecordDialog() {
-            if(this.oRecordDialog) this.oRecordDialog.close();
+            this.oRecordDialog.close();
         },
 
         onDeleteRecord() {
