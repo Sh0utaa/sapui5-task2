@@ -2,19 +2,19 @@
     <content>
         <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
             <Label text="Name" />
-                <Input value="{books>/addRecordForm/name}" placeholder="{i18n>enterBookName}" required="true" />
+                <Input value="{recordModel>/name}" placeholder="{i18n>enterBookName}" required="true" />
             <Label text="Author" />
-                <Input value="{books>/addRecordForm/author}" placeholder="{i18n>enterAuthorName}" required="true" />
+                <Input value="{recordModel>/author}" placeholder="{i18n>enterAuthorName}" required="true" />
             <Label text="Genre"/>
-                <Input value="{books>/addRecordForm/genre}" placeholder="{i18n>forExampleScienceFiction}" required="true" />
+                <Input value="{recordModel>/genre}" placeholder="{i18n>forExampleScienceFiction}" required="true" />
             <Label text="{i18n>releaseDate}" />
                 <DatePicker
                     id="releaseDatePicker"
-                    value="{books>/addRecordForm/releaseDate}"
+                    value="{recordModel>/releaseDate}"
                     required="true"
                     />
             <Label text="{i18n>availableQuantity}"/>
-                <Input value="{books>/addRecordForm/availableQuantity}" type="Number" required="true" />
+                <Input value="{recordModel>/availableQuantity}" type="Number" required="true" />
         </f:SimpleForm>
     </content>
     <buttons>

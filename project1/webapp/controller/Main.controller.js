@@ -67,9 +67,6 @@ sap.ui.define([
                 filter: {
                     query: "",
                     genre: "all"
-                },
-                addRecordForm: {
-                    availableQuantity: 0
                 }
             });
         
@@ -80,9 +77,11 @@ sap.ui.define([
 
         onAddRecord() {
             const oModel = this.getModel("books");
-            const aBooks = oModel.getProperty("/books");
+            const oRecordModel = this.oRecordDialog.getModel("recordModel");
 
-            const oUserRecord = oModel.getProperty("/addRecordForm");
+            const aBooks = oModel.getProperty("/books");
+            const oUserRecord = oRecordModel.getProperty("/");
+
             const name = oUserRecord.name?.trim();
             const author = oUserRecord.author?.trim();
             const genre = oUserRecord.genre?.trim();
@@ -132,18 +131,30 @@ sap.ui.define([
 
             this._updateGenres();
 
-            this.oRecordDialog.close();
+            this.onCloseRecordDialog();
         },
         
         async onAddRecordDialogPress() {
-            this.oRecordDialog ??= await this.loadFragment({
+            const oRecordModel = new JSONModel();
+
+            oRecordModel.setData({
+                availableQuantity: 0
+            });
+
+            this.oRecordDialog = await this.loadFragment({
                 name: "project1.view.fragments.AddRecordDialog"
             });
+            this.oRecordDialog.setModel(oRecordModel, "recordModel");
+
             this.oRecordDialog.open();
         },
 
         onCloseRecordDialog() {
-            this.oRecordDialog.close();
+            if(this.oRecordDialog) {
+                this.oRecordDialog.destroy();
+            } else {
+                console.error("Instance of oRecordDialog already exists");
+            }
         },
 
         onDeleteRecord() {
