@@ -67,7 +67,8 @@ sap.ui.define([
                 filter: {
                     query: "",
                     genre: "all"
-                }
+                },
+                recordId: 5
             });
         
             this.getView().setModel(oModel, "books");
@@ -81,6 +82,9 @@ sap.ui.define([
 
             const aBooks = oModel.getProperty("/books");
             const oUserRecord = oRecordModel.getProperty("/");
+
+            const id = Number(oModel.getProperty("/recordId")) + 1;
+            oModel.setProperty("/recordId", id);
 
             const name = oUserRecord.name?.trim();
             const author = oUserRecord.author?.trim();
@@ -117,7 +121,7 @@ sap.ui.define([
             }
 
             const oNewBook = {
-                ID: Math.floor(Math.random() * 90) + 10,
+                ID: id,
                 Name: name,
                 Author: author,
                 Genre: genre,
