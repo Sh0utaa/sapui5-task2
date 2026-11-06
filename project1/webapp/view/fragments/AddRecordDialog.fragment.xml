@@ -18,7 +18,7 @@
         </f:SimpleForm>
     </content>
     <buttons>
-        <Button text="{i18n>add}" type="Emphasized" press=".onAddRecord"/>
+        <Button text="{i18n>add}" type="Emphasized" press=".onAddRecord" id="AddRecord" />
         <Button text="{i18n>cancel}" press=".onCloseRecordDialog"/>
     </buttons>
 </Dialog>

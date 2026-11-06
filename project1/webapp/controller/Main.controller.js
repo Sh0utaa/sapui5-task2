@@ -131,7 +131,7 @@ sap.ui.define([
 
             aBooks.push(oNewBook);
             oModel.setProperty("/books", aBooks);
-            oModel.setProperty("/addRecordForm", {availableQuantity: 0});
+            oRecordModel.setProperty("/", {availableQuantity: 0});
 
             this._updateGenres();
 
@@ -139,26 +139,26 @@ sap.ui.define([
         },
         
         async onAddRecordDialogPress() {
-            const oRecordModel = new JSONModel();
 
-            oRecordModel.setData({
-                availableQuantity: 0
-            });
+            if(this.oRecordDialog === null || this.oRecordDialog === undefined) {
+                this.oRecordDialog = await this.loadFragment({
+                    name: "project1.view.fragments.AddRecordDialog"
+                });
 
-            this.oRecordDialog = await this.loadFragment({
-                name: "project1.view.fragments.AddRecordDialog"
-            });
-            this.oRecordDialog.setModel(oRecordModel, "recordModel");
+                const oRecordModel = new JSONModel();
+
+                oRecordModel.setData({
+                    availableQuantity: 0
+                });
+
+                this.oRecordDialog.setModel(oRecordModel, "recordModel");
+            }
 
             this.oRecordDialog.open();
         },
 
         onCloseRecordDialog() {
-            if(this.oRecordDialog) {
-                this.oRecordDialog.destroy();
-            } else {
-                console.error("Instance of oRecordDialog already exists");
-            }
+            this.oRecordDialog.close();
         },
 
         onDeleteRecord() {
