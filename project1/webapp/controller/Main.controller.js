@@ -96,32 +96,37 @@ sap.ui.define([
 
             // form validation
             if (!name || !author || !genre || !releaseDate) {
-                MessageBox.error("Please do not leave any fields empty.");
+                MessageBox.error(this.getResourceBundle().getText("emptyFields"));
                 return;
             }
 
             if (name.length < 3 || name.length > 50) {
-                MessageBox.error("Book name must be between 3 and 50 characters.");
+                MessageBox.error(this.getResourceBundle().getText("bookLength"));
                 return;
             }
 
             if (author.length < 3 || author.length > 50) {
-                MessageBox.error("Author name must be between 3 and 50 characters.");
+                MessageBox.error(this.getResourceBundle().getText("authorLength"));
+                return;
+            }
+
+            if (genre.length < 3 || genre.length > 50) {
+                MessageBox.error(this.getResourceBundle().getText("genreLength"));
                 return;
             }
 
             if(!oDP.isValidValue() || releaseDate.length === 0) {
-                MessageBox.error("Please provide a valid date.");
+                MessageBox.error(this.getResourceBundle().getText("validDate"));
                 return;
             }
 
             if(availableQuantity < 0) {
-                MessageBox.error("Quantity cannot be less than 0");
+                MessageBox.error(this.getResourceBundle().getText("quantityCount"));
                 return;
             }
 
-            if(!availableQuantity) {
-                MessageBox.error("Quantity must be positive number");
+            if(typeof(availableQuantity) !== "number") {
+                MessageBox.error(this.getResourceBundle().getText("quantityQuality"));
                 return;
             }
 
