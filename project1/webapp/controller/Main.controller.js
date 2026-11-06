@@ -110,6 +110,11 @@ sap.ui.define([
                 return;
             }
 
+            if (genre.length < 3 || genre.length > 50) {
+                MessageBox.error(this.getResourceBundle().getText("genreLength"));
+                return;
+            }
+
             if(!oDP.isValidValue() || releaseDate.length === 0) {
                 MessageBox.error(this.getResourceBundle().getText("validDate"));
                 return;
@@ -120,7 +125,7 @@ sap.ui.define([
                 return;
             }
 
-            if(!availableQuantity) {
+            if(typeof(availableQuantity) !== "number") {
                 MessageBox.error(this.getResourceBundle().getText("quantityQuality"));
                 return;
             }
