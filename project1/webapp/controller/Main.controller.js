@@ -120,6 +120,11 @@ sap.ui.define([
                 return;
             }
 
+            if(!availableQuantity) {
+                MessageBox.error("Quantity must be positive number");
+                return;
+            }
+
             const oNewBook = {
                 ID: id,
                 Name: name,
