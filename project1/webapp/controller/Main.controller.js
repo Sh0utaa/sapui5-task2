@@ -5,7 +5,13 @@ sap.ui.define([
     "sap/ui/model/FilterOperator",
     "sap/m/MessageToast",
     "sap/m/MessageBox"
-], (BaseController, JSONModel, Filter, FilterOperator, MessageToast, MessageBox) => {
+], (BaseController, 
+    JSONModel, 
+    Filter, 
+    FilterOperator, 
+    MessageToast, 
+    MessageBox
+    ) => {
     "use strict";
 
     return BaseController.extend("project1.controller.Main", {
@@ -61,7 +67,8 @@ sap.ui.define([
                 filter: {
                     query: "",
                     genre: "all"
-                }
+                },
+                recordId: 5
             });
         
             this.getView().setModel(oModel, "books");
@@ -71,21 +78,92 @@ sap.ui.define([
 
         onAddRecord() {
             const oModel = this.getModel("books");
+            const oRecordModel = this.oRecordDialog.getModel("recordModel");
+
             const aBooks = oModel.getProperty("/books");
+            const oUserRecord = oRecordModel.getProperty("/");
+
+            const id = Number(oModel.getProperty("/recordId")) + 1;
+            oModel.setProperty("/recordId", id);
+
+            const name = oUserRecord.name?.trim();
+            const author = oUserRecord.author?.trim();
+            const genre = oUserRecord.genre?.trim();
+            const releaseDate = oUserRecord.releaseDate;
+            const availableQuantity = oUserRecord.availableQuantity;
+
+            const oDP = this.byId("releaseDatePicker");
+
+            // form validation
+            if (!name || !author || !genre || !releaseDate) {
+                MessageBox.error("Please do not leave any fields empty.");
+                return;
+            }
+
+            if (name.length < 3 || name.length > 50) {
+                MessageBox.error("Book name must be between 3 and 50 characters.");
+                return;
+            }
+
+            if (author.length < 3 || author.length > 50) {
+                MessageBox.error("Author name must be between 3 and 50 characters.");
+                return;
+            }
+
+            if(!oDP.isValidValue() || releaseDate.length === 0) {
+                MessageBox.error("Please provide a valid date.");
+                return;
+            }
+
+            if(availableQuantity < 0) {
+                MessageBox.error("Quantity cannot be less than 0");
+                return;
+            }
+
+            if(!availableQuantity) {
+                MessageBox.error("Quantity must be positive number");
+                return;
+            }
 
             const oNewBook = {
-                ID: "",
-                Name: "",
-                Author: "",
-                Genre: "",
-                ReleaseDate: "",
-                AvailableQuantity: 0
+                ID: id,
+                Name: name,
+                Author: author,
+                Genre: genre,
+                ReleaseDate: releaseDate,
+                AvailableQuantity: availableQuantity
             };
 
             aBooks.push(oNewBook);
             oModel.setProperty("/books", aBooks);
+            oRecordModel.setProperty("/", {availableQuantity: 0});
 
             this._updateGenres();
+
+            this.onCloseRecordDialog();
+        },
+        
+        async onAddRecordDialogPress() {
+
+            if(this.oRecordDialog === null || this.oRecordDialog === undefined) {
+                this.oRecordDialog = await this.loadFragment({
+                    name: "project1.view.fragments.AddRecordDialog"
+                });
+
+                const oRecordModel = new JSONModel();
+
+                oRecordModel.setData({
+                    availableQuantity: 0
+                });
+
+                this.oRecordDialog.setModel(oRecordModel, "recordModel");
+            }
+
+            this.oRecordDialog.open();
+        },
+
+        onCloseRecordDialog() {
+            this.oRecordDialog.close();
         },
 
         onDeleteRecord() {
@@ -117,9 +195,10 @@ sap.ui.define([
 
         onConfirmationMessageBoxPress () {
             MessageBox.confirm("Are you sure you want to delete selected records?", {
-                actions: [MessageBox.Action.YES, MessageBox.Action.CANCEL],
+                emphasizedAction: MessageBox.Action.OK,
+                icon: MessageBox.Icon.WARNING,
                 onClose: (sAction) => {
-                    if (sAction === MessageBox.Action.YES) {
+                    if (sAction === MessageBox.Action.OK) {
                         this.onDeleteRecord();
                     }
                 }
@@ -170,7 +249,6 @@ sap.ui.define([
 
             oModel.setProperty(sPath, oProp === undefined || oProp === false ? true : false);
 
-            console.log(oContext.getObject());
         } 
     });
 });

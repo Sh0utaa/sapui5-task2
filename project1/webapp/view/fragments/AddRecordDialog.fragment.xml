@@ -1,0 +1,24 @@
+<Dialog xmlns="sap.m" xmlns:f="sap.ui.layout.form" title="{i18n>addRecordTitle}" contentWidth="28rem">
+    <content>
+        <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+            <Label text="Name" />
+                <Input value="{recordModel>/name}" placeholder="{i18n>enterBookName}" required="true" />
+            <Label text="Author" />
+                <Input value="{recordModel>/author}" placeholder="{i18n>enterAuthorName}" required="true" />
+            <Label text="Genre"/>
+                <Input value="{recordModel>/genre}" placeholder="{i18n>forExampleScienceFiction}" required="true" />
+            <Label text="{i18n>releaseDate}" />
+                <DatePicker
+                    id="releaseDatePicker"
+                    value="{recordModel>/releaseDate}"
+                    required="true"
+                    />
+            <Label text="{i18n>availableQuantity}"/>
+                <Input value="{recordModel>/availableQuantity}" type="Number" required="true" />
+        </f:SimpleForm>
+    </content>
+    <buttons>
+        <Button text="{i18n>add}" type="Emphasized" press=".onAddRecord" id="AddRecord" />
+        <Button text="{i18n>cancel}" press=".onCloseRecordDialog"/>
+    </buttons>
+</Dialog>

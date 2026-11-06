@@ -6,7 +6,7 @@
         <Table id="booksTable" items="{books>/books}" mode="MultiSelect" selectionChange=".onSelectionChange">
             <headerToolbar>
                 <Toolbar >
-                    <Button text="{i18n>addRecord}" press=".onAddRecord" />
+                    <Button text="{i18n>addRecord}" press=".onAddRecordDialogPress" />
                     <Button text="{i18n>deleteRecord}" 
                         press=".onConfirmationMessageBoxPress" 
                         enabled="{books>/document/hasSelected}" />
