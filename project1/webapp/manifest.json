@@ -14,6 +14,26 @@
       "id": "@sap/generator-fiori:basic",
       "version": "1.30.0",
       "toolsId": "cb9e1f91-e404-4295-b497-11c805cf2338"
+    },
+    "dataSources": {
+      "ODataV2": {
+        "uri": "/odata-v2/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadataV2.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ODataV4": {
+        "uri": "/odata-v4/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadataV4.xml",
+          "odataVersion": "4.0"
+        }
+      }
     }
   },
   "sap.ui": {
@@ -50,6 +70,18 @@
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
           "bundleName": "project1.i18n.i18n"
+        }
+      },
+      "odatav2": {
+        "dataSource": "ODataV2",
+        "preload": true,
+        "settings": {}
+      },
+      "odatav4": {
+        "dataSource": "ODataV4",
+        "preload": true,
+        "settings": {
+          "autoExpandSelect": true
         }
       }
     },
