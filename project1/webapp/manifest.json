@@ -81,7 +81,8 @@
         "dataSource": "ODataV4",
         "preload": true,
         "settings": {
-          "autoExpandSelect": true
+          "autoExpandSelect": true,
+          "earlyRequests": true
         }
       }
     },
