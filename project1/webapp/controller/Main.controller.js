@@ -98,26 +98,35 @@ sap.ui.define([
 
             const oDP = this.byId("releaseDatePicker");
 
+            const oResourceBundle = this.getResourceBundle();
+
             // form validation
             if (!name || !author || !genre || !releaseDate) {
-                MessageBox.error(this.getResourceBundle().getText("emptyFields"));
+                MessageBox.error(oResourceBundle.getText("emptyFields"));
                 return;
             }
 
-            if (name.length < 3 || name.length > 50) {
-                MessageBox.error(this.getResourceBundle().getText("bookLength"));
-                return;
-            }
+            function _validateLength (sKey, sValue, iMin, iMax) {
+                if(sValue.length < iMin || sValue.length > iMax) {
+                    MessageBox.error(
+                        oResourceBundle.getText(
+                            "fieldLength",
+                            [oResourceBundle.getText(sKey), iMin, iMax]
+                        )
+                    );
 
-            if (author.length < 3 || author.length > 50) {
-                MessageBox.error(this.getResourceBundle().getText("authorLength"));
-                return;
-            }
+                    return false;
+                }
 
-            if (genre.length < 3 || genre.length > 50) {
-                MessageBox.error(this.getResourceBundle().getText("genreLength"));
-                return;
+                return true;
             }
+ 
+            const minLenVal = 3;
+            const maxLenVal = 5;
+ 
+            if(!_validateLength("fieldBook", name, minLenVal, maxLenVal)) return;
+            if(!_validateLength("fieldAuthor", author, minLenVal, maxLenVal)) return;
+            if(!_validateLength("fieldGenre", genre, minLenVal, maxLenVal)) return;
 
             if(!oDP.isValidValue() || releaseDate.length === 0) {
                 MessageBox.error(this.getResourceBundle().getText("validDate"));
