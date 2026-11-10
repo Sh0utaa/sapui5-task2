@@ -10,6 +10,10 @@ sap.ui.define([
 
         getResourceBundle() {
             return this.getOwnerComponent().getModel("i18n").getResourceBundle();
+        },
+
+        getText(sKey, aPlaceholders) {
+            return this.getResourceBundle().getText(sKey, aPlaceholders);
         }
     });
 });

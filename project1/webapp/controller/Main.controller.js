@@ -98,20 +98,18 @@ sap.ui.define([
 
             const oDP = this.byId("releaseDatePicker");
 
-            const oResourceBundle = this.getResourceBundle();
-
             // form validation
             if (!name || !author || !genre || !releaseDate) {
-                MessageBox.error(oResourceBundle.getText("emptyFields"));
+                MessageBox.error(this.getText("emptyFields"));
                 return;
             }
 
-            function _validateLength (sKey, sValue, iMin, iMax) {
+            const _validateLength = (sKey, sValue, iMin, iMax) => {
                 if(sValue.length < iMin || sValue.length > iMax) {
                     MessageBox.error(
-                        oResourceBundle.getText(
+                        this.getText(
                             "fieldLength",
-                            [oResourceBundle.getText(sKey), iMin, iMax]
+                            [this.getText(sKey), iMin, iMax]
                         )
                     );
 
@@ -119,7 +117,7 @@ sap.ui.define([
                 }
 
                 return true;
-            }
+            };
  
             const minLenVal = 3;
             const maxLenVal = 5;
@@ -129,17 +127,17 @@ sap.ui.define([
             if(!_validateLength("fieldGenre", genre, minLenVal, maxLenVal)) return;
 
             if(!oDP.isValidValue() || releaseDate.length === 0) {
-                MessageBox.error(this.getResourceBundle().getText("validDate"));
+                MessageBox.error(this.getText("validDate"));
                 return;
             }
 
             if(availableQuantity < 0) {
-                MessageBox.error(this.getResourceBundle().getText("quantityCount"));
+                MessageBox.error(this.getText("quantityCount"));
                 return;
             }
 
-            if(typeof(availableQuantity) !== "number") {
-                MessageBox.error(this.getResourceBundle().getText("quantityQuality"));
+            if(availableQuantity === "" || isNaN(Number(availableQuantity))) {
+                MessageBox.error(this.getText("quantityQuality"));
                 return;
             }
 
