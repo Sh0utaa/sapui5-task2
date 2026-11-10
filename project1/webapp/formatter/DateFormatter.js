@@ -3,7 +3,9 @@ sap.ui.define([], () => {
 
     return {
         displayPublishedYear: function(sDate) {
-            return `Published: {${sDate.substring(0,4)}}`;
+            const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+            return `${oResourceBundle.getText("published")}: ${sDate.substring(0,4)}`;
         }
     };
 });

@@ -4,17 +4,21 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/MessageToast",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "../formatter/DateFormatter"
 ], (BaseController, 
     JSONModel, 
     Filter, 
     FilterOperator, 
     MessageToast, 
-    MessageBox
+    MessageBox,
+    DateFormatter
     ) => {
     "use strict";
 
     return BaseController.extend("project1.controller.Main", {
+        formatter: DateFormatter,
+
         onInit() {
             const oModel = new JSONModel();
 
