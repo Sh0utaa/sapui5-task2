@@ -119,12 +119,12 @@ sap.ui.define([
                 return true;
             };
  
-            const minLenVal = 3;
-            const maxLenVal = 5;
+            const iMinLen = 3;
+            const iMaxLen = 5;
  
-            if(!_validateLength("fieldBook", name, minLenVal, maxLenVal)) return;
-            if(!_validateLength("fieldAuthor", author, minLenVal, maxLenVal)) return;
-            if(!_validateLength("fieldGenre", genre, minLenVal, maxLenVal)) return;
+            if(!_validateLength("fieldBook", name, iMinLen, iMaxLen)) return;
+            if(!_validateLength("fieldAuthor", author, iMinLen, iMaxLen)) return;
+            if(!_validateLength("fieldGenre", genre, iMinLen, iMaxLen)) return;
 
             if(!oDP.isValidValue() || releaseDate.length === 0) {
                 MessageBox.error(this.getText("validDate"));
