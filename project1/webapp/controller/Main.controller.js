@@ -192,7 +192,7 @@ sap.ui.define([
             const aSelectedItems = oTable.getSelectedItems();
 
             if (aSelectedItems.length === 0) {
-                MessageToast.show(this.getResourceBundle().getText("selectRecordFirst"));
+                MessageToast.show(this.getText("selectRecordFirst"));
                 return;
             }
 
@@ -245,8 +245,7 @@ sap.ui.define([
                 .sort()
                 .map(sGenre => ({ key: sGenre, name: sGenre }));
 
-            const oBundle = this.getResourceBundle();
-            aGenres.unshift({ key: "all", name: oBundle.getText("allGenres") });
+            aGenres.unshift({ key: "all", name: this.getText("allGenres") });
 
             oModel.setProperty("/genres", aGenres);
         },

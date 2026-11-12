@@ -8,12 +8,8 @@ sap.ui.define([
             return this.getView().getModel(sName);
         },
 
-        getResourceBundle() {
-            return this.getOwnerComponent().getModel("i18n").getResourceBundle();
-        },
-
         getText(sKey, aPlaceholders) {
-            return this.getResourceBundle().getText(sKey, aPlaceholders);
+            return this.getOwnerComponent().getModel("i18n").getResourceBundle().getText(sKey, aPlaceholders);
         }
     });
 });
