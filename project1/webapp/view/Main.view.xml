@@ -74,7 +74,7 @@
                 </Table>
                 </IconTabFilter >
                 <IconTabFilter text="OData Version 2.0" >
-                    <Table id="odatav2-table" mode="MultiSelect">
+                    <Table id="odatav2-table" mode="MultiSelect" items="{odatav2>/Products}" >
                         <columns>
                             <Column><Text text="{i18n>productId}" /></Column>
                             <Column><Text text="{i18n>productName}" /></Column>
@@ -83,9 +83,20 @@
                             <Column><Text text="{i18n>productDiscontinuedDate}" /></Column>
                             <Column><Text text="{i18n>productRating}" /></Column>
                             <Column><Text text="{i18n>productPrice}" /></Column>
-                            <Column><Text text="{i18n>productCategory}" /></Column>
-                            <Column><Text text="{i18n>productSupplier}" /></Column>
                         </columns>
+                        <items>
+                            <ColumnListItem >
+                                <cells>
+                                <Text text="{odatav2>ID}" />
+                                <Text text="{odatav2>Name}" />
+                                <Text text="{odatav2>Description}" />
+                                <Text text="{path: 'odatav2>ReleaseDate', type: 'sap.ui.model.type.Date'}" />
+                                <Text text="{path: 'odatav2>DiscontinuedDate', type: 'sap.ui.model.type.Date'}" />
+                                <Text text="{odatav2>Rating}" />
+                                <Text text="{odatav2>Price}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
                     </Table>
                 </IconTabFilter >
                 <IconTabFilter text="OData Version 4.0" >
@@ -98,8 +109,6 @@
                             <Column><Text text="{i18n>productDiscontinuedDate}" /></Column>
                             <Column><Text text="{i18n>productRating}" /></Column>
                             <Column><Text text="{i18n>productPrice}" /></Column>
-                            <Column><Text text="{i18n>productCategory}" /></Column>
-                            <Column><Text text="{i18n>productSupplier}" /></Column>
                         </columns>
                     </Table>
                 </IconTabFilter >
