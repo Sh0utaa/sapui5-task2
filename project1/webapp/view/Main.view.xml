@@ -100,7 +100,7 @@
                     </Table>
                 </IconTabFilter >
                 <IconTabFilter text="OData Version 4.0" >
-                    <Table id="odatav4-table" mode="MultiSelect">
+                    <Table id="odatav4-table" mode="MultiSelect" items="{odatav4>/Products}" >
                         <columns>
                             <Column><Text text="{i18n>productId}" /></Column>
                             <Column><Text text="{i18n>productName}" /></Column>
@@ -110,6 +110,19 @@
                             <Column><Text text="{i18n>productRating}" /></Column>
                             <Column><Text text="{i18n>productPrice}" /></Column>
                         </columns>
+                        <items>
+                            <ColumnListItem >
+                                <cells>
+                                    <Text text="{odatav4>ID}" />
+                                    <Text text="{odatav4>Name}" />
+                                    <Text text="{odatav4>Description}" />
+                                    <Text text="{path: 'odatav4>ReleaseDate', type: 'sap.ui.model.odata.type.DateTimeOffset', constraints: {precision: 3}}" />
+                                    <Text text="{path: 'odatav4>DiscontinuedDate', type: 'sap.ui.model.odata.type.DateTimeOffset', constraints: {precision: 3}}" />
+                                    <Text text="{odatav4>Rating}" />
+                                    <Text text="{odatav4>Price}" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
                     </Table>
                 </IconTabFilter >
             </items>
