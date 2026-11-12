@@ -276,6 +276,7 @@ sap.ui.define([
             const aPaths = aSelectedObjects.map(obj => 
                 obj.getBindingContext("odatav2").getPath()
             );
+            const sGroupId = "deleteProducts";
 
             if(aPaths.length === 0) {
                 MessageBox.error(this.getText("productsDeleteNoSelection"));
@@ -284,6 +285,7 @@ sap.ui.define([
             
             aPaths.forEach((sPath) => {
                 oModel.remove(sPath, {
+                    groupId: sGroupId,
                     success: () => {
                         MessageToast.show(this.getText("productsDeleteSuccess"));
                     },
