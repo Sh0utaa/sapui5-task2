@@ -72,6 +72,11 @@
                 </IconTabFilter >
                 <IconTabFilter text="OData Version 2.0" >
                     <Table id="odatav2-table" mode="MultiSelect" items="{odatav2>/Products}" >
+                        <headerToolbar>
+                            <Toolbar >
+                                <Button text="{i18n>productDelete}" type="Emphasized" press=".onDeleteProduct"  />
+                            </Toolbar>
+                        </headerToolbar>
                         <columns>
                             <Column><Text text="{i18n>productId}" /></Column>
                             <Column><Text text="{i18n>productName}" /></Column>
