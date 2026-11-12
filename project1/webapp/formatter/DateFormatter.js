@@ -3,7 +3,7 @@ sap.ui.define([], () => {
 
     return {
         displayPublishedYear: function(sDate) {
-            return `Published: {${sDate.substring(0,4)}}`;
+            return this.getText("published", [sDate.substring(0,4)]);
         }
     };
 });

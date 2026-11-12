@@ -1,8 +1,5 @@
 <mvc:View controllerName="project1.controller.Main"
     xmlns:core="sap.ui.core"
-    core:require="{
-        DateFormatter: 'project1/formatter/DateFormatter'
-    }"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     >
@@ -60,7 +57,7 @@
                         <Text text="{
                             path: 'books>ReleaseDate',
                             type: 'sap.ui.model.type.String',
-                            formatter: 'DateFormatter.displayPublishedYear'
+                            formatter: '.formatter.displayPublishedYear'
                         }" />
                         <ObjectNumber number="{books>AvailableQuantity}" />
                     </cells>

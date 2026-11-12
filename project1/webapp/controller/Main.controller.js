@@ -4,17 +4,21 @@ sap.ui.define([
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
     "sap/m/MessageToast",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "../formatter/DateFormatter"
 ], (BaseController, 
     JSONModel, 
     Filter, 
     FilterOperator, 
     MessageToast, 
-    MessageBox
+    MessageBox,
+    DateFormatter
     ) => {
     "use strict";
 
     return BaseController.extend("project1.controller.Main", {
+        formatter: DateFormatter,
+
         onInit() {
             const oModel = new JSONModel();
 
@@ -96,37 +100,44 @@ sap.ui.define([
 
             // form validation
             if (!name || !author || !genre || !releaseDate) {
-                MessageBox.error(this.getResourceBundle().getText("emptyFields"));
+                MessageBox.error(this.getText("emptyFields"));
                 return;
             }
 
-            if (name.length < 3 || name.length > 50) {
-                MessageBox.error(this.getResourceBundle().getText("bookLength"));
-                return;
-            }
+            const _validateLength = (sKey, sValue, iMin, iMax) => {
+                if(sValue.length < iMin || sValue.length > iMax) {
+                    MessageBox.error(
+                        this.getText(
+                            "fieldLength",
+                            [this.getText(sKey), iMin, iMax]
+                        )
+                    );
 
-            if (author.length < 3 || author.length > 50) {
-                MessageBox.error(this.getResourceBundle().getText("authorLength"));
-                return;
-            }
+                    return false;
+                }
 
-            if (genre.length < 3 || genre.length > 50) {
-                MessageBox.error(this.getResourceBundle().getText("genreLength"));
-                return;
-            }
+                return true;
+            };
+ 
+            const iMinLen = 3;
+            const iMaxLen = 5;
+ 
+            if(!_validateLength("fieldBook", name, iMinLen, iMaxLen)) return;
+            if(!_validateLength("fieldAuthor", author, iMinLen, iMaxLen)) return;
+            if(!_validateLength("fieldGenre", genre, iMinLen, iMaxLen)) return;
 
             if(!oDP.isValidValue() || releaseDate.length === 0) {
-                MessageBox.error(this.getResourceBundle().getText("validDate"));
+                MessageBox.error(this.getText("validDate"));
                 return;
             }
 
             if(availableQuantity < 0) {
-                MessageBox.error(this.getResourceBundle().getText("quantityCount"));
+                MessageBox.error(this.getText("quantityCount"));
                 return;
             }
 
-            if(typeof(availableQuantity) !== "number") {
-                MessageBox.error(this.getResourceBundle().getText("quantityQuality"));
+            if(availableQuantity === "" || isNaN(Number(availableQuantity))) {
+                MessageBox.error(this.getText("quantityQuality"));
                 return;
             }
 
@@ -181,7 +192,7 @@ sap.ui.define([
             const aSelectedItems = oTable.getSelectedItems();
 
             if (aSelectedItems.length === 0) {
-                MessageToast.show(this.getResourceBundle().getText("selectRecordFirst"));
+                MessageToast.show(this.getText("selectRecordFirst"));
                 return;
             }
 
@@ -234,8 +245,7 @@ sap.ui.define([
                 .sort()
                 .map(sGenre => ({ key: sGenre, name: sGenre }));
 
-            const oBundle = this.getResourceBundle();
-            aGenres.unshift({ key: "all", name: oBundle.getText("allGenres") });
+            aGenres.unshift({ key: "all", name: this.getText("allGenres") });
 
             oModel.setProperty("/genres", aGenres);
         },
