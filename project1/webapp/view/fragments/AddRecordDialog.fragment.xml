@@ -12,6 +12,7 @@
                     id="releaseDatePicker"
                     value="{recordModel>/releaseDate}"
                     required="true"
+                    valueFormat="yyyy-MM-dd" 
                     />
             <Label text="{i18n>availableQuantity}"/>
                 <Input value="{recordModel>/availableQuantity}" type="Number" required="true" />
