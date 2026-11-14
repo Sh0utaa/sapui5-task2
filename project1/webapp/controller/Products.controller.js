@@ -43,9 +43,10 @@ sap.ui.define([
         },
 
         onAddProduct() {
-            const oModel = this.oProductDialog.getModel("productModel");
+            const oModel = this.getOwnerComponent().getModel("odatav2");
+            const oProductModel = this.oProductDialog.getModel("productModel");
             const oItemsBinding = this.getView().byId("odatav2-table").getBinding("items");
-            const oFormData = oModel.getData();
+            const oFormData = oProductModel.getData();
             
             const oData = {
                 Name: oFormData.Name,
@@ -59,12 +60,16 @@ sap.ui.define([
             oItemsBinding.create(oData, false, {
                 success: () => {
                     MessageToast.show("Created Product");
+                    oProductModel.setData({});
                 },
                 error: (oError) => {
                     MessageBox.error("Failed to Create Product");
                     console.log(oError);
-                }
+                },
+                groupId: sGroupId 
             });
+
+            oModel.submitChanges({ groupId: sGroupId });
 
             this.closeProductDialog();
         },
