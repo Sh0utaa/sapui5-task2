@@ -264,6 +264,6 @@ sap.ui.define([
 
             oModel.setProperty(sPath, oProp === undefined || oProp === false ? true : false);
 
-        } 
+        }
     });
 });
