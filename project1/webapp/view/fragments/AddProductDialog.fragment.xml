@@ -2,27 +2,27 @@
     <content>
         <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
             <Label text="{i18n>productName}" />
-                <Input value="{productModel>/name}" required="true" />
+                <Input value="{productModel>/Name}" required="true" />
             <Label text="{i18n>productDescription}" />
-                <Input value="{productModel>/description}" required="true" />
+                <Input value="{productModel>/Description}" required="true" />
             <Label text="{i18n>productReleaseDate}"/>
                 <DatePicker
-                    value="{productModel>/releaseDate}"
+                    value="{productModel>/ReleaseDate}"
                     required="true"
                     valueFormat="yyyy-MM-dd" 
                     id="o2ReleaseDate"
                     />
             <Label text="{i18n>productDiscontinuedDate}" />
                 <DatePicker
-                    value="{productModel>/discontinuedDate}"
+                    value="{productModel>/DiscontinuedDate}"
                     required="true"
                     valueFormat="yyyy-MM-dd" 
                     id="o2DiscontinuedDate"
                     />
             <Label text="{i18n>productRating}"/>
-                <Input value="{productModel>/rating}" type="Number" required="true" />
+                <Input value="{productModel>/Rating}" type="Number" required="true" />
             <Label text="{i18n>productPrice}"/>
-                <Input value="{productModel>/price}" type="Number" required="true" />
+                <Input value="{productModel>/Price}" type="Number" required="true" />
         </f:SimpleForm>
     </content>
     <buttons>

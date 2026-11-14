@@ -5,7 +5,7 @@ sap.ui.define([
     "sap/m/MessageBox"
 ], (BaseController, JSONModel, MessageToast, MessageBox) => {
     "use strict";
-    const sGroupId = "deleteProducts";
+    const sGroupId = "productsGroupId";
 
     return BaseController.extend("project1.controller.Products.v2", {
         onInit() {
@@ -23,6 +23,15 @@ sap.ui.define([
 
                 const oProductModel = new JSONModel();
 
+                oProductModel.setData({
+                    Name: "Pencil",
+                    Description: "Normal wooden pencil for writing",
+                    ReleaseDate: "1999-12-12",
+                    DiscontinuedDate: "2008-02-03",
+                    Rating: "8.56",
+                    Price: "1.99"
+                });
+
                 this.oProductDialog.setModel(oProductModel, "productModel");
             }
 
@@ -35,7 +44,29 @@ sap.ui.define([
 
         onAddProduct() {
             const oModel = this.oProductDialog.getModel("productModel");
-            console.log(oModel.getData());
+            const oItemsBinding = this.getView().byId("odatav2-table").getBinding("items");
+            const oFormData = oModel.getData();
+            
+            const oData = {
+                Name: oFormData.Name,
+                Description: oFormData.Description,
+                ReleaseDate: new Date(oFormData.ReleaseDate),
+                DiscontinuedDate: new Date(oFormData.DiscontinuedDate),
+                Rating: oFormData.Rating,
+                Price: oFormData.Price
+            };
+
+            oItemsBinding.create(oData, false, {
+                success: () => {
+                    MessageToast.show("Created Product");
+                },
+                error: (oError) => {
+                    MessageBox.error("Failed to Create Product");
+                    console.log(oError);
+                }
+            });
+
+            this.closeProductDialog();
         },
 
         onDeleteProduct() {
