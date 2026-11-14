@@ -34,7 +34,8 @@ sap.ui.define([
         },
 
         onAddProduct() {
-
+            const oModel = this.oProductDialog.getModel("productModel");
+            console.log(oModel.getData());
         },
 
         onDeleteProduct() {
