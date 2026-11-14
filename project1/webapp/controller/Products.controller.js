@@ -1,8 +1,9 @@
 sap.ui.define([
     "project1/controller/BaseController",
+    "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
     "sap/m/MessageBox"
-], (BaseController, MessageToast, MessageBox) => {
+], (BaseController, JSONModel, MessageToast, MessageBox) => {
     "use strict";
     const sGroupId = "deleteProducts";
 
@@ -12,6 +13,28 @@ sap.ui.define([
 
             const aDeferredGroups = oModel.getDeferredGroups();
             oModel.setDeferredGroups(aDeferredGroups.concat([sGroupId]));
+        },
+
+        async showProductDialog() {
+            if(this.oProductDialog === undefined || this.oProductDialog === null) {
+                this.oProductDialog = await this.loadFragment({
+                    name: "project1.view.fragments.AddProductDialog"
+                });
+
+                const oProductModel = new JSONModel();
+
+                this.oProductDialog.setModel(oProductModel, "productModel");
+            }
+
+            this.oProductDialog.open();
+        },
+
+        closeProductDialog() {
+            this.oProductDialog.close();
+        },
+
+        onAddProduct() {
+
         },
 
         onDeleteProduct() {

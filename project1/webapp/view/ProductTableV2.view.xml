@@ -5,7 +5,8 @@
     <Table id="odatav2-table" mode="MultiSelect" items="{odatav2>/Products}" >
         <headerToolbar>
             <Toolbar >
-                <Button text="{i18n>productDelete}" type="Emphasized" press=".onDeleteProduct"  />
+                <Button text="{i18n>addRecord}" press=".showProductDialog" />
+                <Button text="{i18n>productDelete}" press=".onDeleteProduct"  />
             </Toolbar>
         </headerToolbar>
         <columns>
