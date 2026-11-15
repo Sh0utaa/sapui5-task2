@@ -104,30 +104,15 @@ sap.ui.define([
                 return;
             }
 
-            const _validateLength = (sKey, sValue, iMin, iMax) => {
-                if(sValue.length < iMin || sValue.length > iMax) {
-                    MessageBox.error(
-                        this.getText(
-                            "fieldLength",
-                            [this.getText(sKey), iMin, iMax]
-                        )
-                    );
-
-                    return false;
-                }
-
-                return true;
-            };
- 
             const iMinLen = 3;
             const iMaxLen = 5;
  
-            if(!_validateLength("fieldBook", name, iMinLen, iMaxLen)) return;
-            if(!_validateLength("fieldAuthor", author, iMinLen, iMaxLen)) return;
-            if(!_validateLength("fieldGenre", genre, iMinLen, iMaxLen)) return;
+            if(!this.validateLength("fieldBook", name, iMinLen, iMaxLen)) return;
+            if(!this.validateLength("fieldAuthor", author, iMinLen, iMaxLen)) return;
+            if(!this.validateLength("fieldGenre", genre, iMinLen, iMaxLen)) return;
 
             if(!oDP.isValidValue() || releaseDate.length === 0) {
-                MessageBox.error(this.getText("validDate"));
+                MessageBox.error(this.getText("validateDate", [this.getText("releaseDate")]));
                 return;
             }
 
@@ -264,6 +249,6 @@ sap.ui.define([
 
             oModel.setProperty(sPath, oProp === undefined || oProp === false ? true : false);
 
-        } 
+        }
     });
 });

@@ -1,0 +1,59 @@
+<Dialog xmlns="sap.m" xmlns:f="sap.ui.layout.form" title="{i18n>addRecordTitle}" contentWidth="28rem">
+    <content>
+        <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+            <Label text="{i18n>productName}" />
+            <Input
+                id="o2Name"
+                value="{productModel>/Name}"
+                placeholder="{i18n>productNamePlaceholder}"
+                required="true"
+                liveChange=".onInputChange" />
+
+            <Label text="{i18n>productDescription}" />
+            <Input
+                id="o2Description"
+                value="{productModel>/Description}"
+                placeholder="{i18n>productDescriptionPlaceholder}"
+                required="true"
+                liveChange=".onInputChange" />
+
+            <Label text="{i18n>productReleaseDate}" />
+            <DatePicker
+                id="o2ReleaseDate"
+                value="{productModel>/ReleaseDate}"
+                placeholder="{i18n>productReleaseDatePlaceholder}"
+                valueFormat="yyyy-MM-dd"
+                required="true"
+                change=".onInputChange" />
+
+            <Label text="{i18n>productDiscontinuedDate}" />
+            <DatePicker
+                id="o2DiscontinuedDate"
+                value="{productModel>/DiscontinuedDate}"
+                placeholder="{i18n>productDiscontinuedDatePlaceholder}"
+                valueFormat="yyyy-MM-dd"
+                required="true"
+                change=".onInputChange" />
+
+            <Label text="{i18n>productRating}" />
+            <Input
+                id="o2ProductRating"
+                value="{productModel>/Rating}"
+                placeholder="{i18n>productRatingPlaceholder}"
+                required="true"
+                liveChange=".onInputChange" />
+
+            <Label text="{i18n>productPrice}" />
+            <Input
+                id="o2ProductPrice"
+                value="{productModel>/Price}"
+                placeholder="{i18n>productPricePlaceholder}"
+                required="true"
+                liveChange=".onInputChange" />
+        </f:SimpleForm>
+    </content>
+    <buttons>
+        <Button text="{i18n>save}" type="Emphasized" press=".onAddProduct" />
+        <Button text="{i18n>cancel}" press=".closeProductDialog" />
+    </buttons>
+</Dialog>
