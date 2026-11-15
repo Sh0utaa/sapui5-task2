@@ -23,14 +23,14 @@ sap.ui.define([
 
                 const oProductModel = new JSONModel();
 
-                oProductModel.setData({
-                    Name: "Pencil",
-                    Description: "Normal wooden pencil for writing",
-                    ReleaseDate: "1999-12-12",
-                    DiscontinuedDate: "2008-02-03",
-                    Rating: "8.56",
-                    Price: "1.99"
-                });
+                // oProductModel.setData({
+                //     Name: "Pencil",
+                //     Description: "Normal wooden pencil for writing",
+                //     ReleaseDate: "1999-12-12",
+                //     DiscontinuedDate: "2008-02-03",
+                //     Rating: "8.56",
+                //     Price: "1.99"
+                // });
 
                 this.oProductDialog.setModel(oProductModel, "productModel");
             }
@@ -47,7 +47,9 @@ sap.ui.define([
             const oProductModel = this.oProductDialog.getModel("productModel");
             const oItemsBinding = this.getView().byId("odatav2-table").getBinding("items");
             const oFormData = oProductModel.getData();
-            
+
+            if(!this._validateFormData(oFormData)) return;
+
             const oData = {
                 Name: oFormData.Name,
                 Description: oFormData.Description,
@@ -57,7 +59,7 @@ sap.ui.define([
                 Price: oFormData.Price
             };
 
-            oItemsBinding.create(oData, false, {
+            oItemsBinding.create(oData, true, {
                 success: () => {
                     MessageToast.show("Created Product");
                     oProductModel.setData({});
@@ -72,6 +74,58 @@ sap.ui.define([
             oModel.submitChanges({ groupId: sGroupId });
 
             this.closeProductDialog();
+        },
+
+        _validateFormData(oFormData) {
+            const iMin = 3;
+            const iMax = 50;
+
+            const sName = (oFormData.Name || "").trim();
+            if (sName.length < iMin || sName.length > iMax) {
+                MessageBox.error(this.getText("validateLength", [this.getText("productFieldName"), iMin, iMax]));
+                return false;
+            }
+
+            const sDescription = (oFormData.Description || "").trim();
+            if (sDescription.length < iMin || sDescription.length > iMax) {
+                MessageBox.error(this.getText("validateLength", [this.getText("productFieldDescription"), iMin, iMax]));
+                return false;
+            }
+
+            const oReleaseDP = this.byId("o2ReleaseDate");
+            const dRelease = new Date(oFormData.ReleaseDate);
+            if (!oReleaseDP.isValidValue() || !dRelease) {
+                MessageBox.error(this.getText("validateDate", [this.getText("productReleaseDate"), iMin, iMax]));
+                return false;
+            }
+
+            const oDiscontinuedDP = this.byId("o2DiscontinuedDate");
+            const dDiscontinued = new Date(oFormData.DiscontinuedDate);
+            if (!oDiscontinuedDP.isValidValue() || !dDiscontinued) {
+                MessageBox.error(this.getText("validateDate", [this.getText("productDiscontinuedDate"), iMin, iMax]));
+                return false;
+            }
+
+            if (dDiscontinued < dRelease) {
+                MessageBox.error(this.getText("productDateOrderError"));
+                return false;
+            }
+
+            const sRating = oFormData.Rating.trim();
+            const iRating = Number(sRating);
+            if (sRating === "" || iRating < 0 || iRating > 10) {
+                MessageBox.error(this.getText("productRatingError"));
+                return false;
+            }
+
+            const sPrice = oFormData.Price.trim();
+            const fPrice = Number(sPrice);
+            if (sPrice === "" || fPrice < 0) {
+                MessageBox.error(this.getText("productPriceError"));
+                return false;
+            }
+
+            return true;
         },
 
         onDeleteProduct() {
