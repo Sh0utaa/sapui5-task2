@@ -61,11 +61,11 @@ sap.ui.define([
 
             oItemsBinding.create(oData, true, {
                 success: () => {
-                    MessageToast.show("Created Product");
+                    MessageToast.show(this.getText("productCreateSuccess"));
                     oProductModel.setData({});
                 },
                 error: (oError) => {
-                    MessageBox.error("Failed to Create Product");
+                    MessageBox.error(this.getText("productCreateError"));
                     console.log(oError);
                 },
                 groupId: sGroupId 
