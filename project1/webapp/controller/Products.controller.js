@@ -128,6 +128,18 @@ sap.ui.define([
             return true;
         },
 
+        onInputChange(oEvent) {
+            const oInput = this.byId(oEvent.getSource().getId());
+            
+            const sValue = oEvent.getParameters().value;
+            if(sValue.length < 1) {
+                oInput.setValueState("Error");
+                oInput.setValueStateText("Can't be left empty.");
+            } else {
+                oInput.setValueState("None");
+            }
+        },
+
         onDeleteProduct() {
             const oModel = this.getOwnerComponent().getModel("odatav2");
             const oTable = this.byId("odatav2-table");
