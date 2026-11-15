@@ -80,6 +80,35 @@ sap.ui.define([
             const iMin = 3;
             const iMax = 50;
 
+            // validate empty fields
+            const oIdObj = {
+                Name: "o2Name",
+                Description: "o2Description",
+                ReleaseDate: "o2ReleaseDate",
+                DiscontinuedDate: "o2DiscontinuedDate",
+                Rating: "o2ProductRating",
+                Price: "o2ProductPrice"
+            };
+
+            const aKeys = Object.keys(oIdObj);
+
+            let bIsValid = true;
+            for(let i = 0; i < aKeys.length; i++) {
+                const sProductKey = aKeys[i];
+                if(!(sProductKey in oFormData) || oFormData[sProductKey] === "") {
+                    const oInput = this.byId(oIdObj[sProductKey]);
+                    oInput.setValueState("Error");
+                    oInput.setValueStateText(this.getText("productEmptyProductsError"));
+
+                    bIsValid = false;
+                }
+            }
+
+            if(!bIsValid) {
+                MessageBox.error(this.getText("emptyFields"));
+                return false;
+            }
+
             const sName = (oFormData.Name || "").trim();
             if (sName.length < iMin || sName.length > iMax) {
                 MessageBox.error(this.getText("validateLength", [this.getText("productFieldName"), iMin, iMax]));
@@ -134,7 +163,7 @@ sap.ui.define([
             const sValue = oEvent.getParameters().value;
             if(sValue.length < 1) {
                 oInput.setValueState("Error");
-                oInput.setValueStateText("Can't be left empty.");
+                oInput.setValueStateText(this.getText("productEmptyProductsError"));
             } else {
                 oInput.setValueState("None");
             }

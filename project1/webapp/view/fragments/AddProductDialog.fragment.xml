@@ -2,9 +2,9 @@
     <content>
         <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
             <Label text="{i18n>productName}" />
-                <Input value="{productModel>/Name}" required="true" liveChange=".onInputChange" id="ProductName" />
+                <Input value="{productModel>/Name}" required="true" liveChange=".onInputChange" id="o2Name" />
             <Label text="{i18n>productDescription}" />
-                <Input value="{productModel>/Description}" required="true" liveChange=".onInputChange" id="ProductDescripition" />
+                <Input value="{productModel>/Description}" required="true" liveChange=".onInputChange" id="o2Description" />
             <Label text="{i18n>productReleaseDate}"/>
                 <DatePicker
                     value="{productModel>/ReleaseDate}"
@@ -22,9 +22,9 @@
                     liveChange="onInputChange"
                     />
             <Label text="{i18n>productRating}"/>
-                <Input value="{productModel>/Rating}" type="Number" required="true" id="ProductRating" liveChange="onInputChange" />
+                <Input value="{productModel>/Rating}" type="Number" required="true" id="o2ProductRating" liveChange="onInputChange" />
             <Label text="{i18n>productPrice}"/>
-                <Input value="{productModel>/Price}" type="Number" required="true" id="ProductPrice" liveChange="onInputChange" />
+                <Input value="{productModel>/Price}" type="Number" required="true" id="o2ProductPrice" liveChange="onInputChange" />
         </f:SimpleForm>
     </content>
     <buttons>
