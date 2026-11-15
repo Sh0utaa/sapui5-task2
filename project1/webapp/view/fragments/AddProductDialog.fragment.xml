@@ -2,33 +2,60 @@
     <content>
         <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
             <Label text="{i18n>productName}" />
-                <Input value="{productModel>/Name}" required="true" liveChange=".onInputChange" id="o2Name" />
+            <Input
+                id="o2Name"
+                value="{productModel>/Name}"
+                placeholder="{i18n>productNamePlaceholder}"
+                required="true"
+                liveChange=".onInputChange" />
+
             <Label text="{i18n>productDescription}" />
-                <Input value="{productModel>/Description}" required="true" liveChange=".onInputChange" id="o2Description" />
-            <Label text="{i18n>productReleaseDate}"/>
-                <DatePicker
-                    value="{productModel>/ReleaseDate}"
-                    required="true"
-                    valueFormat="yyyy-MM-dd" 
-                    id="o2ReleaseDate"
-                    liveChange="onInputChange"
-                    />
+            <Input
+                id="o2Description"
+                value="{productModel>/Description}"
+                placeholder="{i18n>productDescriptionPlaceholder}"
+                required="true"
+                liveChange=".onInputChange" />
+
+            <Label text="{i18n>productReleaseDate}" />
+            <DatePicker
+                id="o2ReleaseDate"
+                value="{productModel>/ReleaseDate}"
+                placeholder="{i18n>productReleaseDatePlaceholder}"
+                valueFormat="yyyy-MM-dd"
+                required="true"
+                change=".onInputChange" />
+
             <Label text="{i18n>productDiscontinuedDate}" />
-                <DatePicker
-                    value="{productModel>/DiscontinuedDate}"
-                    required="true"
-                    valueFormat="yyyy-MM-dd" 
-                    id="o2DiscontinuedDate"
-                    liveChange="onInputChange"
-                    />
-            <Label text="{i18n>productRating}"/>
-                <Input value="{productModel>/Rating}" type="Number" required="true" id="o2ProductRating" liveChange="onInputChange" />
-            <Label text="{i18n>productPrice}"/>
-                <Input value="{productModel>/Price}" type="Number" required="true" id="o2ProductPrice" liveChange="onInputChange" />
+            <DatePicker
+                id="o2DiscontinuedDate"
+                value="{productModel>/DiscontinuedDate}"
+                placeholder="{i18n>productDiscontinuedDatePlaceholder}"
+                valueFormat="yyyy-MM-dd"
+                required="true"
+                change=".onInputChange" />
+
+            <Label text="{i18n>productRating}" />
+            <Input
+                id="o2ProductRating"
+                value="{productModel>/Rating}"
+                placeholder="{i18n>productRatingPlaceholder}"
+                type="Number"
+                required="true"
+                liveChange=".onInputChange" />
+
+            <Label text="{i18n>productPrice}" />
+            <Input
+                id="o2ProductPrice"
+                value="{productModel>/Price}"
+                placeholder="{i18n>productPricePlaceholder}"
+                type="Number"
+                required="true"
+                liveChange=".onInputChange" />
         </f:SimpleForm>
     </content>
     <buttons>
         <Button text="{i18n>add}" type="Emphasized" press=".onAddProduct" />
-        <Button text="{i18n>cancel}" press=".closeProductDialog"/>
+        <Button text="{i18n>cancel}" press=".closeProductDialog" />
     </buttons>
 </Dialog>
