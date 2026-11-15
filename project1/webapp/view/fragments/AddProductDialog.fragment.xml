@@ -40,7 +40,6 @@
                 id="o2ProductRating"
                 value="{productModel>/Rating}"
                 placeholder="{i18n>productRatingPlaceholder}"
-                type="Number"
                 required="true"
                 liveChange=".onInputChange" />
 
@@ -49,7 +48,6 @@
                 id="o2ProductPrice"
                 value="{productModel>/Price}"
                 placeholder="{i18n>productPricePlaceholder}"
-                type="Number"
                 required="true"
                 liveChange=".onInputChange" />
         </f:SimpleForm>

@@ -142,14 +142,14 @@ sap.ui.define([
 
             const sRating = oFormData.Rating.trim();
             const iRating = Number(sRating);
-            if (sRating === "" || iRating < 0 || iRating > 10) {
+            if (sRating === "" || isNaN(iRating) || iRating <= 0 || iRating > 10) {
                 MessageBox.error(this.getText("productRatingError"));
                 return false;
             }
 
             const sPrice = oFormData.Price.trim();
             const fPrice = Number(sPrice);
-            if (sPrice === "" || fPrice < 0) {
+            if (sPrice === "" || isNaN(fPrice) || fPrice < 0) {
                 MessageBox.error(this.getText("productPriceError"));
                 return false;
             }
