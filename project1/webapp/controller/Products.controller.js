@@ -15,32 +15,27 @@ sap.ui.define([
         },
 
         onDeleteProduct() {
-            const oModel = this.getOwnerComponent().getModel("odatav2");
+            const oModel = this.getView().getModel("odatav2");
             const oTable = this.byId("odatav2-table");
 
-            const aSelectedObjects = oTable.getSelectedItems();
-
-            const aContexts = aSelectedObjects.map(obj => 
-                obj.getBindingContext("odatav2")
-            );
+            const aContexts = oTable.getSelectedContexts();
 
             if(aContexts.length === 0) {
                 MessageBox.error(this.getText("productsDeleteNoSelection"));
                 return;
             }
             
-            const aPromises = aContexts.map((oContext) => oContext.delete({ groupId: sGroupId }));
+            aContexts.map((oContext) => oContext.delete({ groupId: sGroupId }));
 
-            oModel.submitChanges({groupId: sGroupId});
-
-            Promise.all(aPromises)
-            .then(() => {
-                MessageToast.show(this.getText("productsDeleteSuccess"));
-                oTable.removeSelections(true);
-            })
-            .catch((oError) => {
-                MessageBox.error(this.getText("productsDeleteError"));
-                console.error(oError);
+            oModel.submitChanges({groupId: sGroupId, 
+                success: () => {
+                    MessageToast.show(this.getText("productsDeleteSuccess"));
+                    oTable.removeSelections(true);
+                },
+                error: (oError) => {
+                    MessageBox.error(this.getText("productsDeleteError"));
+                    console.error(oError);
+                }
             });
         }
     });
