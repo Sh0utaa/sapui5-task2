@@ -4,21 +4,21 @@
             <Label text="{i18n>productName}" />
             <Input
                 id="o2Name"
-                value="{productModel>/Name}"
+                value="{odatav2>Name}"
                 placeholder="{i18n>productNamePlaceholder}"
                 required="true" />
 
             <Label text="{i18n>productDescription}" />
             <Input
                 id="o2Description"
-                value="{productModel>/Description}"
+                value="{odatav2>/Description}"
                 placeholder="{i18n>productDescriptionPlaceholder}"
                 required="true" />
 
             <Label text="{i18n>productReleaseDate}" />
             <DatePicker
                 id="o2ReleaseDate"
-                value="{productModel>/ReleaseDate}"
+                value="{odatav2>/ReleaseDate}"
                 placeholder="{i18n>productReleaseDatePlaceholder}"
                 valueFormat="yyyy-MM-dd"
                 required="true" />
@@ -26,7 +26,7 @@
             <Label text="{i18n>productDiscontinuedDate}" />
             <DatePicker
                 id="o2DiscontinuedDate"
-                value="{productModel>/DiscontinuedDate}"
+                value="{odatav2>/DiscontinuedDate}"
                 placeholder="{i18n>productDiscontinuedDatePlaceholder}"
                 valueFormat="yyyy-MM-dd"
                 required="true" />
@@ -34,14 +34,14 @@
             <Label text="{i18n>productRating}" />
             <Input
                 id="o2ProductRating"
-                value="{productModel>/Rating}"
+                value="{odatav2>/Rating}"
                 placeholder="{i18n>productRatingPlaceholder}"
                 required="true" />
 
             <Label text="{i18n>productPrice}" />
             <Input
                 id="o2ProductPrice"
-                value="{productModel>/Price}"
+                value="{odatav2>/Price}"
                 placeholder="{i18n>productPricePlaceholder}"
                 required="true" />
         </f:SimpleForm>

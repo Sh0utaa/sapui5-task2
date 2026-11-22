@@ -18,22 +18,14 @@ sap.ui.define([
         async showProductDialog() {
             if(this.oProductDialog === undefined || this.oProductDialog === null) {
                 this.oProductDialog = await this.loadFragment({
-                    name: "project1.view.fragments.AddProductDialog"
+                    name: "project1.view.fragments.ProductDialog"
                 });
-
-                const oProductModel = new JSONModel();
-
-                // oProductModel.setData({
-                //     Name: "Pencil",
-                //     Description: "Normal wooden pencil for writing",
-                //     ReleaseDate: "1999-12-12",
-                //     DiscontinuedDate: "2008-02-03",
-                //     Rating: "8.56",
-                //     Price: "1.99"
-                // });
-
-                this.oProductDialog.setModel(oProductModel, "productModel");
             }
+
+            const oModel = this.getOwnerComponent().getModel("odatav2");
+            const oContext = oModel.createEntry("/Products");
+
+            this.oProductDialog.setBindingContext(oContext, "odatav2");
 
             this.oProductDialog.open();
         },
@@ -43,35 +35,19 @@ sap.ui.define([
         },
 
         onAddProduct() {
+            // get context
+            // validate data
+            // finally update data
+
             const oModel = this.getOwnerComponent().getModel("odatav2");
-            const oProductModel = this.oProductDialog.getModel("productModel");
-            const oItemsBinding = this.getView().byId("odatav2-table").getBinding("items");
-            const oFormData = oProductModel.getData();
+            const oContext = this.oProductDialog.getBindingContext("odatav2");
 
-            if(!this._validateFormData(oFormData)) return;
+            console.log(oContext);
 
-            const oData = {
-                Name: oFormData.Name,
-                Description: oFormData.Description,
-                ReleaseDate: new Date(oFormData.ReleaseDate),
-                DiscontinuedDate: new Date(oFormData.DiscontinuedDate),
-                Rating: oFormData.Rating,
-                Price: oFormData.Price
-            };
-
-            oItemsBinding.create(oData, true, {
-                success: () => {
-                    MessageToast.show(this.getText("productCreateSuccess"));
-                    oProductModel.setData({});
-                },
-                error: (oError) => {
-                    MessageBox.error(this.getText("productCreateError"));
-                    console.log(oError);
-                },
-                groupId: sGroupId 
+            oModel.submitChanges({
+                success: () => {},
+                error: () => {}
             });
-
-            oModel.submitChanges({ groupId: sGroupId });
 
             this.closeProductDialog();
         },
