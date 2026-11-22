@@ -157,17 +157,17 @@ sap.ui.define([
             return true;
         },
 
-        onInputChange(oEvent) {
-            const oInput = this.byId(oEvent.getSource().getId());
+        // onInputChange(oEvent) {
+        //     const oInput = this.byId(oEvent.getSource().getId());
             
-            const sValue = oEvent.getParameters().value;
-            if(sValue.length < 1) {
-                oInput.setValueState("Error");
-                oInput.setValueStateText(this.getText("productEmptyProductsError"));
-            } else {
-                oInput.setValueState("None");
-            }
-        },
+        //     const sValue = oEvent.getParameters().value;
+        //     if(sValue.length < 1) {
+        //         oInput.setValueState("Error");
+        //         oInput.setValueStateText(this.getText("productEmptyProductsError"));
+        //     } else {
+        //         oInput.setValueState("None");
+        //     }
+        // },
 
         onDeleteProduct() {
             const oModel = this.getOwnerComponent().getModel("odatav2");

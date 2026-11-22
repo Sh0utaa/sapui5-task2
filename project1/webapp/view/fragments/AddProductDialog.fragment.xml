@@ -6,16 +6,14 @@
                 id="o2Name"
                 value="{productModel>/Name}"
                 placeholder="{i18n>productNamePlaceholder}"
-                required="true"
-                liveChange=".onInputChange" />
+                required="true" />
 
             <Label text="{i18n>productDescription}" />
             <Input
                 id="o2Description"
                 value="{productModel>/Description}"
                 placeholder="{i18n>productDescriptionPlaceholder}"
-                required="true"
-                liveChange=".onInputChange" />
+                required="true" />
 
             <Label text="{i18n>productReleaseDate}" />
             <DatePicker
@@ -23,8 +21,7 @@
                 value="{productModel>/ReleaseDate}"
                 placeholder="{i18n>productReleaseDatePlaceholder}"
                 valueFormat="yyyy-MM-dd"
-                required="true"
-                change=".onInputChange" />
+                required="true" />
 
             <Label text="{i18n>productDiscontinuedDate}" />
             <DatePicker
@@ -32,24 +29,21 @@
                 value="{productModel>/DiscontinuedDate}"
                 placeholder="{i18n>productDiscontinuedDatePlaceholder}"
                 valueFormat="yyyy-MM-dd"
-                required="true"
-                change=".onInputChange" />
+                required="true" />
 
             <Label text="{i18n>productRating}" />
             <Input
                 id="o2ProductRating"
                 value="{productModel>/Rating}"
                 placeholder="{i18n>productRatingPlaceholder}"
-                required="true"
-                liveChange=".onInputChange" />
+                required="true" />
 
             <Label text="{i18n>productPrice}" />
             <Input
                 id="o2ProductPrice"
                 value="{productModel>/Price}"
                 placeholder="{i18n>productPricePlaceholder}"
-                required="true"
-                liveChange=".onInputChange" />
+                required="true" />
         </f:SimpleForm>
     </content>
     <buttons>
