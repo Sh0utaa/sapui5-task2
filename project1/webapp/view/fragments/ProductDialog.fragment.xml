@@ -11,37 +11,35 @@
             <Label text="{i18n>productDescription}" />
             <Input
                 id="o2Description"
-                value="{odatav2>/Description}"
+                value="{odatav2>Description}"
                 placeholder="{i18n>productDescriptionPlaceholder}"
                 required="true" />
 
             <Label text="{i18n>productReleaseDate}" />
             <DatePicker
                 id="o2ReleaseDate"
-                value="{odatav2>/ReleaseDate}"
+                value="{odatav2>ReleaseDate}"
                 placeholder="{i18n>productReleaseDatePlaceholder}"
-                valueFormat="yyyy-MM-dd"
                 required="true" />
 
             <Label text="{i18n>productDiscontinuedDate}" />
             <DatePicker
                 id="o2DiscontinuedDate"
-                value="{odatav2>/DiscontinuedDate}"
+                value="{odatav2>DiscontinuedDate}"
                 placeholder="{i18n>productDiscontinuedDatePlaceholder}"
-                valueFormat="yyyy-MM-dd"
                 required="true" />
 
             <Label text="{i18n>productRating}" />
             <Input
                 id="o2ProductRating"
-                value="{odatav2>/Rating}"
+                value="{odatav2>Rating}"
                 placeholder="{i18n>productRatingPlaceholder}"
                 required="true" />
 
             <Label text="{i18n>productPrice}" />
             <Input
                 id="o2ProductPrice"
-                value="{odatav2>/Price}"
+                value="{odatav2>Price}"
                 placeholder="{i18n>productPricePlaceholder}"
                 required="true" />
         </f:SimpleForm>

@@ -22,8 +22,8 @@ sap.ui.define([
                 });
             }
 
-            const oModel = this.getOwnerComponent().getModel("odatav2");
-            const oContext = oModel.createEntry("/Products");
+            const oModel = this.getOdataV2();
+            const oContext = oModel.createEntry("/Products", { properties: { Name: "Shota" }});
 
             this.oProductDialog.setBindingContext(oContext, "odatav2");
 
@@ -42,12 +42,12 @@ sap.ui.define([
             const oModel = this.getOwnerComponent().getModel("odatav2");
             const oContext = this.oProductDialog.getBindingContext("odatav2");
 
-            console.log(oContext);
+            console.log(oContext.getObject());
 
-            oModel.submitChanges({
-                success: () => {},
-                error: () => {}
-            });
+            // oModel.submitChanges({
+            //     success: () => {},
+            //     error: () => {}
+            // });
 
             this.closeProductDialog();
         },
