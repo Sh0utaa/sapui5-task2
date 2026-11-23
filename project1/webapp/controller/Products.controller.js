@@ -30,7 +30,6 @@ sap.ui.define([
         },
 
         async onCancelProduct() {
-            // remove context from dialog and oModel
             const oModel = this.getOdataV2();
             const oContext = this.oProductDialog.getBindingContext("odatav2");
 
