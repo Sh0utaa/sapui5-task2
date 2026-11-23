@@ -19,6 +19,10 @@ sap.ui.define([
                 this.oProductDialog = await this.loadFragment({
                     name: "project1.view.fragments.ProductDialog"
                 });
+
+                this.oProductDialog.setEscapeHandler(() => {
+                    this.onCancelProduct();
+                });
             }
 
             const oModel = this.getOdataV2();
