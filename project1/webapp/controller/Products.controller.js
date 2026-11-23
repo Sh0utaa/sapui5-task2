@@ -26,8 +26,10 @@ sap.ui.define([
             }
 
             const oModel = this.getOdataV2();
-            const oContext = oEvent.getSource().getBindingContext("odatav2")
-                || oModel.createEntry("/Products");
+            const oButtonContext = oEvent.getSource().getBindingContext("odatav2");
+            const oContext = oButtonContext || oModel.createEntry("/Products");
+            
+            this.oProductDialog.setTitle(this.getText(oButtonContext ? "editRecordTitle" : "addRecordTitle"));
 
             this.oProductDialog.setBindingContext(oContext, "odatav2");
 
