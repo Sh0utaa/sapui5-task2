@@ -4,16 +4,8 @@ sap.ui.define([
     "sap/m/MessageBox"
 ], (BaseController, MessageToast, MessageBox) => {
     "use strict";
-    const sGroupId = "deleteProducts";
 
     return BaseController.extend("project1.controller.Products.v2", {
-        onInit() {
-            const oModel = this.getOwnerComponent().getModel("odatav2");
-
-            const aDeferredGroups = oModel.getDeferredGroups();
-            oModel.setDeferredGroups(aDeferredGroups.concat([sGroupId]));
-        },
-
         onDeleteProduct() {
             const oModel = this.getView().getModel("odatav2");
             const oTable = this.byId("odatav2-table");
@@ -25,9 +17,9 @@ sap.ui.define([
                 return;
             }
             
-            aContexts.map((oContext) => oContext.delete({ groupId: sGroupId }));
+            aContexts.map((oContext) => oContext.delete());
 
-            oModel.submitChanges({groupId: sGroupId, 
+            oModel.submitChanges({ 
                 success: () => {
                     MessageToast.show(this.getText("productsDeleteSuccess"));
                     oTable.removeSelections(true);
