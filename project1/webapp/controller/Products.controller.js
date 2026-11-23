@@ -1,9 +1,8 @@
 sap.ui.define([
     "project1/controller/BaseController",
-    "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
     "sap/m/MessageBox"
-], (BaseController, JSONModel, MessageToast, MessageBox) => {
+], (BaseController, MessageToast, MessageBox) => {
     "use strict";
     const sGroupId = "productsGroupId";
 
@@ -23,7 +22,12 @@ sap.ui.define([
             }
 
             const oModel = this.getOdataV2();
-            const oContext = oModel.createEntry("/Products", { properties: { Name: "Shota" }});
+            const oContext = oModel.createEntry("/Products", { properties: { 
+                Name: "Carrot",
+                Description: "Orange Carrot",
+                Rating: "10",
+                Price: "1.99"
+             }});
 
             this.oProductDialog.setBindingContext(oContext, "odatav2");
 
@@ -35,19 +39,24 @@ sap.ui.define([
         },
 
         onAddProduct() {
-            // get context
-            // validate data
-            // finally update data
-
             const oModel = this.getOwnerComponent().getModel("odatav2");
             const oContext = this.oProductDialog.getBindingContext("odatav2");
 
+            const oFormData = oContext.getObject();
+
+            if(!this._validateFormData(oFormData)) return;
+
             console.log(oContext.getObject());
 
-            // oModel.submitChanges({
-            //     success: () => {},
-            //     error: () => {}
-            // });
+            oModel.submitChanges({
+                success: () => {
+                    MessageToast.show(this.getText("productCreateSuccess"));
+                },
+                error: (oError) => {
+                    MessageBox.error(this.getText("productCreateError"));
+                    console.log(oError);
+                }
+            });
 
             this.closeProductDialog();
         },
@@ -71,12 +80,15 @@ sap.ui.define([
             let bIsValid = true;
             for(let i = 0; i < aKeys.length; i++) {
                 const sProductKey = aKeys[i];
+                const oInput = this.byId(oIdObj[sProductKey]);
+
                 if(!(sProductKey in oFormData) || oFormData[sProductKey] === "") {
-                    const oInput = this.byId(oIdObj[sProductKey]);
                     oInput.setValueState("Error");
                     oInput.setValueStateText(this.getText("productEmptyProductsError"));
 
                     bIsValid = false;
+                } else {
+                    oInput.setValueState("None");
                 }
             }
 
@@ -132,18 +144,6 @@ sap.ui.define([
 
             return true;
         },
-
-        // onInputChange(oEvent) {
-        //     const oInput = this.byId(oEvent.getSource().getId());
-            
-        //     const sValue = oEvent.getParameters().value;
-        //     if(sValue.length < 1) {
-        //         oInput.setValueState("Error");
-        //         oInput.setValueStateText(this.getText("productEmptyProductsError"));
-        //     } else {
-        //         oInput.setValueState("None");
-        //     }
-        // },
 
         onDeleteProduct() {
             const oModel = this.getOwnerComponent().getModel("odatav2");

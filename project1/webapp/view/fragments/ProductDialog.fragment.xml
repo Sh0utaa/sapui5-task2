@@ -18,14 +18,14 @@
             <Label text="{i18n>productReleaseDate}" />
             <DatePicker
                 id="o2ReleaseDate"
-                value="{odatav2>ReleaseDate}"
+                dateValue='{odatav2>ReleaseDate}'
                 placeholder="{i18n>productReleaseDatePlaceholder}"
                 required="true" />
 
             <Label text="{i18n>productDiscontinuedDate}" />
             <DatePicker
                 id="o2DiscontinuedDate"
-                value="{odatav2>DiscontinuedDate}"
+                dateValue="{odatav2>DiscontinuedDate}"
                 placeholder="{i18n>productDiscontinuedDatePlaceholder}"
                 required="true" />
 
