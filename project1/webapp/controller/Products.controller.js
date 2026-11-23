@@ -22,19 +22,22 @@ sap.ui.define([
             }
 
             const oModel = this.getOdataV2();
-            const oContext = oModel.createEntry("/Products", { properties: { 
-                Name: "Carrot",
-                Description: "Orange Carrot",
-                Rating: "10",
-                Price: "1.99"
-             }});
+            const oContext = oModel.createEntry("/Products");
 
             this.oProductDialog.setBindingContext(oContext, "odatav2");
 
             this.oProductDialog.open();
         },
 
-        closeProductDialog() {
+        async onCancelProduct() {
+            // remove context from dialog and oModel
+            const oModel = this.getOdataV2();
+            const oContext = this.oProductDialog.getBindingContext("odatav2");
+
+            if(oContext) {
+                await oModel.resetChanges([oContext.getPath()]);
+            }
+
             this.oProductDialog.close();
         },
 
@@ -46,8 +49,6 @@ sap.ui.define([
 
             if(!this._validateFormData(oFormData)) return;
 
-            console.log(oContext.getObject());
-
             oModel.submitChanges({
                 success: () => {
                     MessageToast.show(this.getText("productCreateSuccess"));
@@ -58,7 +59,7 @@ sap.ui.define([
                 }
             });
 
-            this.closeProductDialog();
+            this.onCancelProduct();
         },
 
         _validateFormData(oFormData) {

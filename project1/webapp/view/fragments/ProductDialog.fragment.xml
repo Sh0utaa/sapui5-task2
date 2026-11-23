@@ -46,6 +46,6 @@
     </content>
     <buttons>
         <Button text="{i18n>save}" type="Emphasized" press=".onAddProduct" />
-        <Button text="{i18n>cancel}" press=".closeProductDialog" />
+        <Button text="{i18n>cancel}" press=".onCancelProduct" />
     </buttons>
 </Dialog>
