@@ -41,7 +41,7 @@ sap.ui.define([
             this.oProductDialog.close();
         },
 
-        onAddProduct() {
+        onSaveProduct() {
             const oModel = this.getOwnerComponent().getModel("odatav2");
             const oContext = this.oProductDialog.getBindingContext("odatav2");
 
