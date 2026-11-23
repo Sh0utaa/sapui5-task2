@@ -14,7 +14,7 @@ sap.ui.define([
             oModel.setDeferredGroups(aDeferredGroups.concat([sGroupId]));
         },
 
-        async showProductDialog() {
+        async showProductDialog(oEvent) {
             if(this.oProductDialog === undefined || this.oProductDialog === null) {
                 this.oProductDialog = await this.loadFragment({
                     name: "project1.view.fragments.ProductDialog"
@@ -22,7 +22,8 @@ sap.ui.define([
             }
 
             const oModel = this.getOdataV2();
-            const oContext = oModel.createEntry("/Products");
+            const oContext = oEvent.getSource().getBindingContext("odatav2")
+                || oModel.createEntry("/Products");
 
             this.oProductDialog.setBindingContext(oContext, "odatav2");
 
@@ -128,16 +129,14 @@ sap.ui.define([
                 return false;
             }
 
-            const sRating = oFormData.Rating.trim();
-            const iRating = Number(sRating);
-            if (sRating === "" || isNaN(iRating) || iRating <= 0 || iRating > 10) {
+            const iRating = oFormData.Rating;
+            if (iRating === null || isNaN(iRating) || iRating <= 0 || iRating > 10) {
                 MessageBox.error(this.getText("productRatingError"));
                 return false;
             }
 
-            const sPrice = oFormData.Price.trim();
-            const fPrice = Number(sPrice);
-            if (sPrice === "" || isNaN(fPrice) || fPrice < 0) {
+            const fPrice = oFormData.Price;
+            if (fPrice === null || isNaN(fPrice) || fPrice < 0) {
                 MessageBox.error(this.getText("productPriceError"));
                 return false;
             }
