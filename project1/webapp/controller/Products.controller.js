@@ -149,7 +149,7 @@ sap.ui.define([
                 return;
             }
             
-            aContexts.map((oContext) => oContext.delete());
+            aContexts.forEach((oContext) => oContext.delete());
 
             oModel.submitChanges({ 
                 success: () => {
