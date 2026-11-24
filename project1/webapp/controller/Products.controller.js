@@ -8,7 +8,7 @@ sap.ui.define([
 
     return BaseController.extend("project1.controller.Products.v2", {
         onInit() {
-            const oModel = this.getOwnerComponent().getModel("odatav2");
+            const oModel = this.getModel("odatav2");
 
             const aDeferredGroups = oModel.getDeferredGroups();
             oModel.setDeferredGroups(aDeferredGroups.concat([sGroupId]));
@@ -25,7 +25,7 @@ sap.ui.define([
                 });
             }
 
-            const oModel = this.getOdataV2();
+            const oModel = this.getModel("odatav2");
             const oButtonContext = oEvent.getSource().getBindingContext("odatav2");
             const oContext = oButtonContext || oModel.createEntry("/Products");
             
@@ -37,7 +37,7 @@ sap.ui.define([
         },
 
         async onCancelProduct() {
-            const oModel = this.getOdataV2();
+            const oModel = this.getModel("odatav2");
             const oContext = this.oProductDialog.getBindingContext("odatav2");
 
             if(oContext) {
@@ -48,7 +48,7 @@ sap.ui.define([
         },
 
         onSaveProduct() {
-            const oModel = this.getOwnerComponent().getModel("odatav2");
+            const oModel = this.getModel("odatav2");
             const oContext = this.oProductDialog.getBindingContext("odatav2");
 
             const oFormData = oContext.getObject();
@@ -151,7 +151,7 @@ sap.ui.define([
         },
 
         onDeleteProduct() {
-            const oModel = this.getOwnerComponent().getModel("odatav2");
+            const oModel = this.getModel("odatav2");
             const oTable = this.byId("odatav2-table");
 
             const aSelectedObjects = oTable.getSelectedItems();

@@ -9,10 +9,6 @@ sap.ui.define([
             return this.getView().getModel(sName);
         },
 
-        getOdataV2() {
-            return this.getOwnerComponent().getModel("odatav2");
-        },
-
         getText(sKey, aPlaceholders) {
             return this.getOwnerComponent().getModel("i18n").getResourceBundle().getText(sKey, aPlaceholders);
         },
