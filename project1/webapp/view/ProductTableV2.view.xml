@@ -29,7 +29,7 @@
                     <Text text="{path: 'odatav2>DiscontinuedDate', type: 'sap.ui.model.type.Date'}" />
                     <Text text="{odatav2>Rating}" />
                     <Text text="{odatav2>Price}" />
-                    <Button text="{i18n>productEdit}" press=".showProductDialog" id="editProduct"></Button>
+                    <Button text="{i18n>productEdit}" press=".showProductDialog" id="editProduct" />
                 </cells>
             </ColumnListItem>
         </items>
