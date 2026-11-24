@@ -4,15 +4,8 @@ sap.ui.define([
     "sap/m/MessageBox"
 ], (BaseController, MessageToast, MessageBox) => {
     "use strict";
-    const sGroupId = "productsGroupId";
 
     return BaseController.extend("project1.controller.Products.v2", {
-        onInit() {
-            const oModel = this.getModel("odatav2");
-
-            const aDeferredGroups = oModel.getDeferredGroups();
-            oModel.setDeferredGroups(aDeferredGroups.concat([sGroupId]));
-        },
 
         async showProductDialog(oEvent) {
             if(this.oProductDialog === undefined || this.oProductDialog === null) {
@@ -151,32 +144,27 @@ sap.ui.define([
         },
 
         onDeleteProduct() {
-            const oModel = this.getModel("odatav2");
+            const oModel = this.getView().getModel("odatav2");
             const oTable = this.byId("odatav2-table");
 
-            const aSelectedObjects = oTable.getSelectedItems();
-
-            const aContexts = aSelectedObjects.map(obj => 
-                obj.getBindingContext("odatav2")
-            );
+            const aContexts = oTable.getSelectedContexts();
 
             if(aContexts.length === 0) {
                 MessageBox.error(this.getText("productsDeleteNoSelection"));
                 return;
             }
             
-            const aPromises = aContexts.map((oContext) => oContext.delete({ groupId: sGroupId }));
+            aContexts.map((oContext) => oContext.delete());
 
-            oModel.submitChanges({groupId: sGroupId});
-
-            Promise.all(aPromises)
-            .then(() => {
-                MessageToast.show(this.getText("productsDeleteSuccess"));
-                oTable.removeSelections(true);
-            })
-            .catch((oError) => {
-                MessageBox.error(this.getText("productsDeleteError"));
-                console.error(oError);
+            oModel.submitChanges({ 
+                success: () => {
+                    MessageToast.show(this.getText("productsDeleteSuccess"));
+                    oTable.removeSelections(true);
+                },
+                error: (oError) => {
+                    MessageBox.error(this.getText("productsDeleteError"));
+                    console.error(oError);
+                }
             });
         }
     });
