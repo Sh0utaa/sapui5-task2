@@ -4,15 +4,8 @@ sap.ui.define([
     "sap/m/MessageBox"
 ], (BaseController, MessageToast, MessageBox) => {
     "use strict";
-    const sGroupId = "productsGroupId";
 
     return BaseController.extend("project1.controller.Products.v2", {
-        onInit() {
-            const oModel = this.getOwnerComponent().getModel("odatav2");
-
-            const aDeferredGroups = oModel.getDeferredGroups();
-            oModel.setDeferredGroups(aDeferredGroups.concat([sGroupId]));
-        },
 
         async showProductDialog() {
             if(this.oProductDialog === undefined || this.oProductDialog === null) {
@@ -21,7 +14,7 @@ sap.ui.define([
                 });
             }
 
-            const oModel = this.getOdataV2();
+            const oModel = this.getModel("odatav2");
             const oContext = oModel.createEntry("/Products");
 
             this.oProductDialog.setBindingContext(oContext, "odatav2");
@@ -30,7 +23,7 @@ sap.ui.define([
         },
 
         async onCancelProduct() {
-            const oModel = this.getOdataV2();
+            const oModel = this.getModel("odatav2");
             const oContext = this.oProductDialog.getBindingContext("odatav2");
 
             if(oContext) {
@@ -41,7 +34,7 @@ sap.ui.define([
         },
 
         onSaveProduct() {
-            const oModel = this.getOwnerComponent().getModel("odatav2");
+            const oModel = this.getModel("odatav2");
             const oContext = this.oProductDialog.getBindingContext("odatav2");
 
             const oFormData = oContext.getObject();
@@ -146,32 +139,27 @@ sap.ui.define([
         },
 
         onDeleteProduct() {
-            const oModel = this.getOwnerComponent().getModel("odatav2");
+            const oModel = this.getModel("odatav2");
             const oTable = this.byId("odatav2-table");
 
-            const aSelectedObjects = oTable.getSelectedItems();
-
-            const aContexts = aSelectedObjects.map(obj => 
-                obj.getBindingContext("odatav2")
-            );
+            const aContexts = oTable.getSelectedContexts();
 
             if(aContexts.length === 0) {
                 MessageBox.error(this.getText("productsDeleteNoSelection"));
                 return;
             }
             
-            const aPromises = aContexts.map((oContext) => oContext.delete({ groupId: sGroupId }));
+            aContexts.map((oContext) => oContext.delete());
 
-            oModel.submitChanges({groupId: sGroupId});
-
-            Promise.all(aPromises)
-            .then(() => {
-                MessageToast.show(this.getText("productsDeleteSuccess"));
-                oTable.removeSelections(true);
-            })
-            .catch((oError) => {
-                MessageBox.error(this.getText("productsDeleteError"));
-                console.error(oError);
+            oModel.submitChanges({ 
+                success: () => {
+                    MessageToast.show(this.getText("productsDeleteSuccess"));
+                    oTable.removeSelections(true);
+                },
+                error: (oError) => {
+                    MessageBox.error(this.getText("productsDeleteError"));
+                    console.error(oError);
+                }
             });
         }
     });
