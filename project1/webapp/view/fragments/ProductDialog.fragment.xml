@@ -1,4 +1,4 @@
-<Dialog xmlns="sap.m" xmlns:f="sap.ui.layout.form" contentWidth="28rem">
+<Dialog xmlns="sap.m" xmlns:f="sap.ui.layout.form" beforeClose=".onProductDialogBeforeClose" contentWidth="28rem">
     <content>
         <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
             <Label text="{i18n>productName}" />

@@ -12,10 +12,6 @@ sap.ui.define([
                 this.oProductDialog = await this.loadFragment({
                     name: "project1.view.fragments.ProductDialog"
                 });
-
-                this.oProductDialog.setEscapeHandler(() => {
-                    this.onCancelProduct();
-                });
             }
 
             const oModel = this.getModel("odatav2");
@@ -29,14 +25,16 @@ sap.ui.define([
             this.oProductDialog.open();
         },
 
-        async onCancelProduct() {
+        async onProductDialogBeforeClose() {
             const oModel = this.getModel("odatav2");
             const oContext = this.oProductDialog.getBindingContext("odatav2");
 
             if(oContext) {
                 await oModel.resetChanges([oContext.getPath()]);
             }
+        },
 
+        onCancelProduct() {
             this.oProductDialog.close();
         },
 
@@ -154,7 +152,7 @@ sap.ui.define([
                 return;
             }
             
-            aContexts.map((oContext) => oContext.delete());
+            aContexts.forEach((oContext) => oContext.delete());
 
             oModel.submitChanges({ 
                 success: () => {
