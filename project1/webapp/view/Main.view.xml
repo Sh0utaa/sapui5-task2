@@ -7,7 +7,9 @@
     <Page title="{i18n>pageTitle}">
         <IconTabBar
             id="iconTabBar"
-            class="sapUiResponsiveContentPadding">
+            class="sapUiResponsiveContentPadding"
+            select=".onTabSelect"
+            >
             <items>
                 <IconTabFilter text="JSON Model" key="json-model" >
                     <Table id="booksTable" items="{books>/books}" mode="MultiSelect" selectionChange=".onSelectionChange" >

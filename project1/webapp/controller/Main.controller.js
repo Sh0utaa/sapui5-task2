@@ -88,6 +88,13 @@ sap.ui.define([
             this.byId("iconTabBar").setSelectedKey(sKey);
         },
 
+        onTabSelect(oEvent) {
+            const sKey = oEvent.getParameters().key;
+            const oRouter = this.getOwnerComponent().getRouter();
+            
+            oRouter.navTo("tab", {tabKey: sKey});
+        },
+
         onAddRecord() {
             const oModel = this.getModel("books");
             const oRecordModel = this.oRecordDialog.getModel("recordModel");
