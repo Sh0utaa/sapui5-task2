@@ -5,7 +5,8 @@
     <Table id="odatav2-table" mode="MultiSelect" items="{odatav2>/Products}" >
         <headerToolbar>
             <Toolbar >
-                <Button text="{i18n>productDelete}" type="Emphasized" press=".onDeleteProduct"  />
+                <Button text="{i18n>addRecord}" press=".showProductDialog" />
+                <Button text="{i18n>productDelete}" press=".onDeleteProduct"  />
             </Toolbar>
         </headerToolbar>
         <columns>
@@ -20,13 +21,13 @@
         <items>
             <ColumnListItem >
                 <cells>
-                <Text text="{odatav2>ID}" />
-                <Text text="{odatav2>Name}" />
-                <Text text="{odatav2>Description}" />
-                <Text text="{path: 'odatav2>ReleaseDate', type: 'sap.ui.model.type.Date'}" />
-                <Text text="{path: 'odatav2>DiscontinuedDate', type: 'sap.ui.model.type.Date'}" />
-                <Text text="{odatav2>Rating}" />
-                <Text text="{odatav2>Price}" />
+                    <Text text="{odatav2>ID}" />
+                    <Text text="{odatav2>Name}" />
+                    <Text text="{odatav2>Description}" />
+                    <Text text="{path: 'odatav2>ReleaseDate', type: 'sap.ui.model.type.Date'}" />
+                    <Text text="{path: 'odatav2>DiscontinuedDate', type: 'sap.ui.model.type.Date'}" />
+                    <Text text="{odatav2>Rating}" />
+                    <Text text="{odatav2>Price}" />
                 </cells>
             </ColumnListItem>
         </items>

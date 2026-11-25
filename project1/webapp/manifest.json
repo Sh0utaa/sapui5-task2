@@ -75,7 +75,9 @@
       "odatav2": {
         "dataSource": "ODataV2",
         "preload": true,
-        "settings": {}
+        "settings": {
+          "defaultBindingMode": "TwoWay"
+        }
       },
       "odatav4": {
         "dataSource": "ODataV4",

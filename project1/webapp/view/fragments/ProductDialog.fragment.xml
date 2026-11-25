@@ -1,0 +1,51 @@
+<Dialog xmlns="sap.m" xmlns:f="sap.ui.layout.form" title="{i18n>addRecordTitle}" contentWidth="28rem">
+    <content>
+        <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
+            <Label text="{i18n>productName}" />
+            <Input
+                id="o2Name"
+                value="{odatav2>Name}"
+                placeholder="{i18n>productNamePlaceholder}"
+                required="true" />
+
+            <Label text="{i18n>productDescription}" />
+            <Input
+                id="o2Description"
+                value="{odatav2>Description}"
+                placeholder="{i18n>productDescriptionPlaceholder}"
+                required="true" />
+
+            <Label text="{i18n>productReleaseDate}" />
+            <DatePicker
+                id="o2ReleaseDate"
+                dateValue='{odatav2>ReleaseDate}'
+                placeholder="{i18n>productReleaseDatePlaceholder}"
+                required="true" />
+
+            <Label text="{i18n>productDiscontinuedDate}" />
+            <DatePicker
+                id="o2DiscontinuedDate"
+                dateValue="{odatav2>DiscontinuedDate}"
+                placeholder="{i18n>productDiscontinuedDatePlaceholder}"
+                required="true" />
+
+            <Label text="{i18n>productRating}" />
+            <Input
+                id="o2ProductRating"
+                value="{odatav2>Rating}"
+                placeholder="{i18n>productRatingPlaceholder}"
+                required="true" />
+
+            <Label text="{i18n>productPrice}" />
+            <Input
+                id="o2ProductPrice"
+                value="{odatav2>Price}"
+                placeholder="{i18n>productPricePlaceholder}"
+                required="true" />
+        </f:SimpleForm>
+    </content>
+    <buttons>
+        <Button text="{i18n>save}" type="Emphasized" press=".onSaveProduct" />
+        <Button text="{i18n>cancel}" press=".onCancelProduct" />
+    </buttons>
+</Dialog>
