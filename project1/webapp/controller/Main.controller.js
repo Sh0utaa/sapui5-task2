@@ -20,6 +20,9 @@ sap.ui.define([
         formatter: DateFormatter,
 
         onInit() {
+            const oRouter = this.getOwnerComponent().getRouter();
+            oRouter.getRoute("tab").attachMatched(this._onTabMatched, this);
+
             const oModel = new JSONModel();
 
             oModel.setData({
@@ -78,6 +81,11 @@ sap.ui.define([
             this.getView().setModel(oModel, "books");
 
             this._updateGenres();
+        },
+
+        _onTabMatched(oEvent) {
+            const sKey = oEvent.getParameter("arguments").tabKey;
+            this.byId("iconTabBar").setSelectedKey(sKey);
         },
 
         onAddRecord() {
