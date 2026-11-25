@@ -164,6 +164,10 @@ sap.ui.define([
                     console.error(oError);
                 }
             });
+        },
+
+        onFilterInput(oEvent) {
+            console.log(oEvent.getParameters().value);
         }
     });
 });
