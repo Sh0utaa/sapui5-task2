@@ -7,7 +7,7 @@ sap.ui.define([
 
     return BaseController.extend("project1.controller.Products.v2", {
 
-        async showProductDialog() {
+        async showProductDialog(oEvent) {
             if(this.oProductDialog === undefined || this.oProductDialog === null) {
                 this.oProductDialog = await this.loadFragment({
                     name: "project1.view.fragments.ProductDialog"
@@ -15,21 +15,26 @@ sap.ui.define([
             }
 
             const oModel = this.getModel("odatav2");
-            const oContext = oModel.createEntry("/Products");
+            const oButtonContext = oEvent.getSource().getBindingContext("odatav2");
+            const oContext = oButtonContext || oModel.createEntry("/Products");
+            
+            this.oProductDialog.setTitle(this.getText(oButtonContext ? "editRecordTitle" : "addRecordTitle"));
 
             this.oProductDialog.setBindingContext(oContext, "odatav2");
 
             this.oProductDialog.open();
         },
 
-        async onCancelProduct() {
+        async onProductDialogBeforeClose() {
             const oModel = this.getModel("odatav2");
             const oContext = this.oProductDialog.getBindingContext("odatav2");
 
             if(oContext) {
                 await oModel.resetChanges([oContext.getPath()]);
             }
+        },
 
+        onCancelProduct() {
             this.oProductDialog.close();
         },
 
@@ -121,16 +126,14 @@ sap.ui.define([
                 return false;
             }
 
-            const sRating = oFormData.Rating.trim();
-            const iRating = Number(sRating);
-            if (sRating === "" || isNaN(iRating) || iRating <= 0 || iRating > 10) {
+            const iRating = oFormData.Rating;
+            if (iRating === null || isNaN(iRating) || iRating <= 0 || iRating > 10) {
                 MessageBox.error(this.getText("productRatingError"));
                 return false;
             }
 
-            const sPrice = oFormData.Price.trim();
-            const fPrice = Number(sPrice);
-            if (sPrice === "" || isNaN(fPrice) || fPrice < 0) {
+            const fPrice = oFormData.Price;
+            if (fPrice === null || isNaN(fPrice) || fPrice < 0) {
                 MessageBox.error(this.getText("productPriceError"));
                 return false;
             }
@@ -139,7 +142,7 @@ sap.ui.define([
         },
 
         onDeleteProduct() {
-            const oModel = this.getModel("odatav2");
+            const oModel = this.getView().getModel("odatav2");
             const oTable = this.byId("odatav2-table");
 
             const aContexts = oTable.getSelectedContexts();

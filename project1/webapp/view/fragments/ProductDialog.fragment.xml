@@ -1,4 +1,4 @@
-<Dialog xmlns="sap.m" xmlns:f="sap.ui.layout.form" title="{i18n>addRecordTitle}" contentWidth="28rem">
+<Dialog xmlns="sap.m" xmlns:f="sap.ui.layout.form" beforeClose=".onProductDialogBeforeClose" contentWidth="28rem">
     <content>
         <f:SimpleForm editable="true" layout="ResponsiveGridLayout">
             <Label text="{i18n>productName}" />
@@ -32,14 +32,14 @@
             <Label text="{i18n>productRating}" />
             <Input
                 id="o2ProductRating"
-                value="{odatav2>Rating}"
+                value="{path: 'odatav2>Rating', type: 'sap.ui.model.type.Integer'}"
                 placeholder="{i18n>productRatingPlaceholder}"
                 required="true" />
 
             <Label text="{i18n>productPrice}" />
             <Input
                 id="o2ProductPrice"
-                value="{odatav2>Price}"
+                value="{path: 'odatav2>Price', type: 'sap.ui.model.type.Float'}"
                 placeholder="{i18n>productPricePlaceholder}"
                 required="true" />
         </f:SimpleForm>
