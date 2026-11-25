@@ -1,8 +1,10 @@
 sap.ui.define([
     "project1/controller/BaseController",
     "sap/m/MessageToast",
-    "sap/m/MessageBox"
-], (BaseController, MessageToast, MessageBox) => {
+    "sap/m/MessageBox",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], (BaseController, MessageToast, MessageBox, Filter, FilterOperator) => {
     "use strict";
 
     return BaseController.extend("project1.controller.Products.v2", {
@@ -167,7 +169,11 @@ sap.ui.define([
         },
 
         onFilterInput(oEvent) {
-            console.log(oEvent.getParameters().value);
+            const sUserInput = oEvent.getParameters().value;
+            
+            const oFilter = new Filter("Name", FilterOperator.Contains, sUserInput);
+
+            this.byId("odatav2-table").getBinding("items").filter(oFilter);
         }
     });
 });
