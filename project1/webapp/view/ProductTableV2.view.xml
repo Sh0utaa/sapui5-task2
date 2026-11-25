@@ -6,7 +6,16 @@
         <headerToolbar>
             <Toolbar >
                 <Button text="{i18n>addRecord}" press=".showProductDialog" id="addProduct" />
-                <Button text="{i18n>productDelete}" press=".onDeleteProduct"  />
+                <Button text="{i18n>productDelete}" press=".onDeleteProduct" />
+                <ToolbarSeparator />
+                <Input
+                    id="productFilterInput"
+                    placeholder="{i18n>productFilterInput}"
+                    width="16rem"
+                    valueLiveUpdate="true"
+                    value="{view>/filterValue}"
+                    liveChange=".onFilterInput"
+                />
             </Toolbar>
         </headerToolbar>
         <columns>

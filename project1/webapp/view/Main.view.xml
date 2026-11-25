@@ -23,7 +23,6 @@
                                 placeholder="{i18n>nameFilter}"
                                 width="12rem"
                                 value="{books>/filter/query}"
-                                liveChange=".onFilterChange"
                             />
                             <Select
                                 id="genreFilter"
