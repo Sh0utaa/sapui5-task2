@@ -1,11 +1,24 @@
 sap.ui.define([
     "project1/controller/BaseController",
+    "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
-    "sap/m/MessageBox"
-], (BaseController, MessageToast, MessageBox) => {
+    "sap/m/MessageBox",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], (BaseController, JSONModel, MessageToast, MessageBox, Filter, FilterOperator) => {
     "use strict";
 
     return BaseController.extend("project1.controller.Products.v2", {
+
+        onInit() {
+            const oModel = new JSONModel();
+
+            oModel.setData({
+                filterValue: ""
+            });
+
+            this.getView().setModel(oModel, "view");
+        },
 
         async showProductDialog(oEvent) {
             if(this.oProductDialog === undefined || this.oProductDialog === null) {
@@ -164,6 +177,16 @@ sap.ui.define([
                     console.error(oError);
                 }
             });
+        },
+
+        onFilterInput() {
+            const oViewModel = this.getModel("view");
+
+            const sUserFilter = oViewModel.getProperty("/filterValue");
+            
+            const oFilter = new Filter("Name", FilterOperator.Contains, sUserFilter);
+
+            this.byId("odatav2-table").getBinding("items").filter(oFilter);
         }
     });
 });
