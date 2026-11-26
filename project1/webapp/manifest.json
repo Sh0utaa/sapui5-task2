@@ -120,7 +120,7 @@
         },
         {
           "name": "product",
-          "pattern": "product/{productPath}",
+          "pattern": "product/{productID}",
           "target": "TargetProduct"
         }
       ],

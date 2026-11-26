@@ -29,7 +29,7 @@
             <Column><Text text="{i18n>productEdit}" /></Column>
         </columns>
         <items>
-            <ColumnListItem >
+            <ColumnListItem type="Navigation" press=".onPress" >
                 <cells>
                     <Text text="{odatav2>ID}" />
                     <Text text="{odatav2>Name}" />
