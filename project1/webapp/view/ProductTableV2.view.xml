@@ -1,7 +1,7 @@
 <mvc:View
-    controllerName="project1.controller.Products"
+    controllerName="project1.controller.Records"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m" >
+    xmlns="sap.m">
     <Table id="odatav2-table" mode="MultiSelect" items="{odatav2>/Products}" >
         <headerToolbar>
             <Toolbar >

@@ -1,9 +1,7 @@
 <mvc:View 
     controllerName="project1.controller.Main"
-    xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
-    >
+    xmlns="sap.m">
     <Page title="{i18n>pageTitle}">
         <IconTabBar
             id="iconTabBar"
@@ -12,66 +10,7 @@
             >
             <items>
                 <IconTabFilter text="JSON Model" key="json-model" >
-                    <Table id="booksTable" items="{books>/books}" mode="MultiSelect" selectionChange=".onSelectionChange" >
-                        <headerToolbar>
-                            <Toolbar >
-                                <Button text="{i18n>addRecord}" press=".onAddRecordDialogPress" />
-                                <Button text="{i18n>deleteRecord}" 
-                                    press=".onConfirmationMessageBoxPress" 
-                                    enabled="{books>/document/hasSelected}" />
-                                <ToolbarSeparator />
-                                <Input
-                                    id="filterInput"
-                                    placeholder="{i18n>nameFilter}"
-                                    width="12rem"
-                                    value="{books>/filter/query}"
-                                    liveChange=".onFilterChange"
-                                />
-                                <Select
-                                    id="genreFilter"
-                                    selectedKey="{books>/filter/genre}"
-                                    items="{books>/genres}">
-                                    <core:Item key="{books>key}" text="{books>name}" />
-                                </Select>
-                                <Button text="{i18n>filter}" type="Emphasized" press=".onFilter"></Button>
-                            </Toolbar>
-                        </headerToolbar>
-                        <columns>
-                            <Column><Text text="{i18n>columnId}" /></Column>
-                            <Column><Text text="{i18n>columnName}" /></Column>
-                            <Column><Text text="{i18n>columnActions}" ></Text></Column>
-                            <Column><Text text="{i18n>columnAuthor}" /></Column>
-                            <Column><Text text="{i18n>columnGenre}" /></Column>
-                            <Column><Text text="{i18n>columnReleaseDate}" /></Column>
-                            <Column hAlign="End"><Text text="{i18n>columnAvailable}" /></Column>
-                        </columns>
-                        <items>
-                            <ColumnListItem>
-                                <cells>
-                                    <Text text="{books>ID}" />
-
-                                    <HBox>
-                                        <Text visible="{= !${books>editMode}}" text="{books>Name}" />
-                                        <Input visible="{= ${books>editMode} === true}" value="{books>Name}" />
-                                    </HBox >
-
-                                    <Button text="{= !${books>editMode} ? 'Edit Title' : 'Save' }" 
-                                        press=".onEditTitle" 
-                                    ></Button>
-
-                                    <Text text="{books>Author}" />
-                                    <Text text="{books>Genre}" />
-                                    
-                                    <Text text="{
-                                        path: 'books>ReleaseDate',
-                                        type: 'sap.ui.model.type.String',
-                                        formatter: '.formatter.displayPublishedYear'
-                                    }" />
-                                    <ObjectNumber number="{books>AvailableQuantity}" />
-                                </cells>
-                            </ColumnListItem>
-                        </items>
-                    </Table>
+                    <mvc:XMLView viewName="project1.view.RecordTableJSON"/>
                 </IconTabFilter >
                 <IconTabFilter text="OData Version 2.0" key="odata-v2" >
                     <mvc:XMLView viewName="project1.view.ProductTableV2"/>
