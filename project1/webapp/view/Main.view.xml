@@ -9,14 +9,14 @@
             select=".onTabSelect"
             >
             <items>
-                <IconTabFilter text="JSON Model" key="json-model" >
-                    <mvc:XMLView viewName="project1.view.RecordTableJSON"/>
+                <IconTabFilter id="jsonTab" text="JSON Model" key="json-model" >
+                    <mvc:XMLView viewName="project1.view.tables.RecordTableJSON"/>
                 </IconTabFilter >
-                <IconTabFilter text="OData Version 2.0" key="odata-v2" >
-                    <mvc:XMLView viewName="project1.view.ProductTableV2"/>
+                <IconTabFilter id="odataV2Tab" text="OData Version 2.0" key="odata-v2" >
+                    <mvc:XMLView viewName="project1.view.tables.ProductTableV2"/>
                 </IconTabFilter >
-                <IconTabFilter text="OData Version 4.0" key="odata-v4" >
-                    <mvc:XMLView viewName="project1.view.ProductTableV4"/>
+                <IconTabFilter id="odataV4Tab" text="OData Version 4.0" key="odata-v4" >
+                    <mvc:XMLView viewName="project1.view.tables.ProductTableV4"/>
                 </IconTabFilter >
             </items>
         </IconTabBar>
