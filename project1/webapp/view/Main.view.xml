@@ -10,13 +10,13 @@
             >
             <items>
                 <IconTabFilter id="jsonTab" text="JSON Model" key="json-model" >
-                    <mvc:XMLView viewName="project1.view.tables.RecordTableJSON"/>
+                    <!-- JSON Model is on client side but lazy loaded for consistency -->
                 </IconTabFilter >
                 <IconTabFilter id="odataV2Tab" text="OData Version 2.0" key="odata-v2" >
-                    <mvc:XMLView viewName="project1.view.tables.ProductTableV2"/>
+                    <!-- place content via lazy loading -->
                 </IconTabFilter >
                 <IconTabFilter id="odataV4Tab" text="OData Version 4.0" key="odata-v4" >
-                    <mvc:XMLView viewName="project1.view.tables.ProductTableV4"/>
+                    <!-- place content via lazy loading -->
                 </IconTabFilter >
             </items>
         </IconTabBar>
