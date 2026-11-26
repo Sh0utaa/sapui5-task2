@@ -1,11 +1,9 @@
 sap.ui.define([
-    "project1/controller/BaseController",
-    "sap/ui/core/mvc/XMLView"
-    ], (BaseController, XMLView ) => {
+    "project1/controller/BaseController"
+    ], (BaseController) => {
     "use strict";
 
     const mTabs = {
-        "json-model": "TargetJSON",
         "odata-v2": "TargetV2",
         "odata-v4": "TargetV4" 
     };
@@ -30,7 +28,6 @@ sap.ui.define([
             const sTarget = mTabs[sKey];
 
             if(!sTarget) {
-                console.error(`Tab for '${sKey}' doesn't exist.`);
                 return;
             }
 

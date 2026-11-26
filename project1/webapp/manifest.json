@@ -124,13 +124,6 @@
           "id": "Main",
           "name": "Main"
         },
-        "TargetJSON": {
-          "id": "RecordTableJSON",
-          "name": "tables.RecordTableJSON",
-          "parent": "TargetMain",
-          "controlId": "jsonTab",
-          "controlAggregation": "content"
-        },
         "TargetV2": {
           "id": "ProductTableV2",
           "name": "tables.ProductTableV2",

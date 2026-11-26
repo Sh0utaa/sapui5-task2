@@ -10,7 +10,7 @@
             >
             <items>
                 <IconTabFilter id="jsonTab" text="JSON Model" key="json-model" >
-                    <!-- JSON Model is on client side but lazy loaded for consistency -->
+                    <mvc:XMLView viewName="project1.view.tables.RecordTableJSON"/>
                 </IconTabFilter >
                 <IconTabFilter id="odataV2Tab" text="OData Version 2.0" key="odata-v2" >
                     <!-- place content via lazy loading -->
