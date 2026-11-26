@@ -1,7 +1,6 @@
 sap.ui.define([
     "project1/controller/BaseController",
-    "sap/ui/core/mvc/XMLView"
-    ], (BaseController, XMLView ) => {
+    ], (BaseController) => {
     "use strict";
 
     const mTabs = {

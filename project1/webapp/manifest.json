@@ -117,12 +117,21 @@
           "name": "tab",
           "pattern": "tab/{tabKey}",
           "target": "TargetMain"
+        },
+        {
+          "name": "product",
+          "pattern": "product/{productPath}",
+          "target": "TargetProduct"
         }
       ],
       "targets": {
         "TargetMain": {
           "id": "Main",
           "name": "Main"
+        },
+        "TargetProduct": {
+          "id": "Product",
+          "name": "Product"
         },
         "TargetJSON": {
           "id": "RecordTableJSON",
