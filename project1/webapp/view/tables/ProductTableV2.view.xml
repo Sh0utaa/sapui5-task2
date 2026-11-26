@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="project1.controller.Records"
+    controllerName="project1.controller.Products"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Table id="odatav2-table" mode="MultiSelect" items="{odatav2>/Products}" >
