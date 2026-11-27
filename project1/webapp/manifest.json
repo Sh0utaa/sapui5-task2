@@ -109,17 +109,34 @@
       },
       "routes": [
         {
-          "name": "RouteMain",
-          "pattern": ":?query:",
-          "target": [
-            "TargetMain"
-          ]
+          "name": "home",
+          "pattern": "",
+          "target": "TargetMain"
+        },
+        {
+          "name": "tab",
+          "pattern": "tab/{tabKey}",
+          "target": "TargetMain"
         }
       ],
       "targets": {
         "TargetMain": {
           "id": "Main",
           "name": "Main"
+        },
+        "TargetV2": {
+          "id": "ProductTableV2",
+          "name": "tables.ProductTableV2",
+          "parent": "TargetMain",
+          "controlId": "odataV2Tab",
+          "controlAggregation": "content"
+        },
+        "TargetV4": {
+          "id": "ProductTableV4",
+          "name": "tables.ProductTableV4",
+          "parent": "TargetMain",
+          "controlId": "odataV4Tab",
+          "controlAggregation": "content"
         }
       }
     },
