@@ -17,7 +17,10 @@ sap.ui.define([
 
             this.getView().bindElement({
                 path: sPath,
-                model: "odatav2"
+                model: "odatav2",
+                parameters: {
+                    expand: "Supplier"
+                }
             });
         }
     });
