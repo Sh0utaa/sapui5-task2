@@ -7,27 +7,22 @@ sap.ui.define([
 
     return BaseController.extend("project1.controller.ProductsV4", {
 
-        onDeleteProduct() {
-            const oModel = this.getModel("odatav4");
+        async onDeleteProduct() {
             const oTable = this.byId("odatav4-table");
             const aSelectedContexts = oTable.getSelectedContexts();
-            const sGroupId = "deleteBatch";
 
             if(aSelectedContexts.length === 0) {
                 MessageBox.error(this.getText("productsDeleteNoSelection"));
                 return;
             }
 
-            aSelectedContexts.forEach((oContext) =>  oContext.delete(sGroupId));
-
-            oModel.submitBatch(sGroupId)
-                .then(() => {
-                    MessageToast.show(this.getText("productsDeleteSuccess"));
-                    oTable.removeSelections(true);
-                })
-                .catch((oError) => {
-                    console.error(oError);
-                });
+            try {
+                await Promise.all(aSelectedContexts.map((oContext) => oContext.delete("$auto")));
+                MessageToast.show(this.getText("productsDeleteSuccess"));
+            } catch (oError) {
+                MessageBox.error(this.getText("productsDeleteError"));
+                console.error(oError);
+            }
         }
     });
 });
