@@ -4,8 +4,30 @@
 	xmlns="sap.uxap"
 	xmlns:m="sap.m">
   <ObjectPageLayout id="ObjectPageLayout" >
-    	<headerTitle>
-        <ObjectPageHeader objectTitle="Product" />
+    <headerTitle>
+      <ObjectPageHeader objectTitle="{odatav2>Name}" />
 		</headerTitle>
+  
+      <sections>
+      <ObjectPageSection title="Section 1">
+        <subSections>
+          <ObjectPageSubSection>
+            <blocks>
+              <m:Text text="Product Information" />
+            </blocks>
+          </ObjectPageSubSection>
+        </subSections>
+      </ObjectPageSection>
+
+      <ObjectPageSection title="Section 2">
+        <subSections>
+          <ObjectPageSubSection>
+            <blocks>
+              <m:Text text="Supplier Information" />
+            </blocks>
+          </ObjectPageSubSection>
+        </subSections>
+      </ObjectPageSection>
+    </sections>
   </ObjectPageLayout>
 </mvc:View>

@@ -13,15 +13,11 @@ sap.ui.define([
 
         _onObjectMatched(oEvent) {
             const sProductID = oEvent.getParameter("arguments").productID;
-            const oModel = this.getModel("odatav2");
+            const sPath = `/Products(${sProductID})`;
 
-            oModel.read(`/Products(${sProductID})`, {
-                success: (oProduct) => {
-                    console.log(oProduct);
-                },
-                error: (oError) => {
-                    console.error(oError);
-                }
+            this.getView().bindElement({
+                path: sPath,
+                model: "odatav2"
             });
         }
     });
