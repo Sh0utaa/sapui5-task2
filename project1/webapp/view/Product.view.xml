@@ -2,18 +2,40 @@
   controllerName="project1.controller.Product"
   xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.uxap"
-	xmlns:m="sap.m">
+	xmlns:m="sap.m"
+  xmlns:f="sap.ui.layout.form">
   <ObjectPageLayout id="ObjectPageLayout" >
     <headerTitle>
       <ObjectPageHeader objectTitle="{odatav2>Name}" />
 		</headerTitle>
   
       <sections>
-      <ObjectPageSection title="Section 1">
+      <ObjectPageSection title="{i18n>productInformation}">
         <subSections>
           <ObjectPageSubSection>
             <blocks>
-              <m:Text text="Product Information" />
+              <f:SimpleForm layout="ColumnLayout" columnsM="2" columnsL="2" columnsXL="3">
+                <m:Label text="{i18n>productId}" />
+                <m:Text text="{odatav2>ID}" />
+
+                <m:Label text="{i18n>productName}" />
+                <m:Text text="{odatav2>Name}" />
+
+                <m:Label text="{i18n>productDescription}" />
+                <m:Text text="{odatav2>Description}" />
+
+                <m:Label text="{i18n>productReleaseDate}" />
+                <m:Text text="{path: 'odatav2>ReleaseDate', type: 'sap.ui.model.type.Date'}" />
+
+                <m:Label text="{i18n>productDiscontinuedDate}" />
+                <m:Text text="{path: 'odatav2>DiscontinuedDate', type: 'sap.ui.model.type.Date'}" />
+
+                <m:Label text="{i18n>productRating}" />
+                <m:Text text="{odatav2>Rating}" />
+
+                <m:Label text="{i18n>productPrice}" />
+                <m:Text text="{odatav2>Price}" />
+              </f:SimpleForm>
             </blocks>
           </ObjectPageSubSection>
         </subSections>
