@@ -1,7 +1,13 @@
 <mvc:View
+    controllerName="project1.controller.ProductsV4"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Table id="odatav4-table" mode="MultiSelect" items="{odatav4>/Products}" >
+        <headerToolbar>
+            <Toolbar>
+                <Button text="{i18n>productDelete}" press="onDeleteProduct" />
+            </Toolbar>
+        </headerToolbar>
         <columns>
             <Column><Text text="{i18n>productId}" /></Column>
             <Column><Text text="{i18n>productName}" /></Column>
