@@ -20,6 +20,16 @@ sap.ui.define([
             this.getView().setModel(oModel, "view");
         },
 
+        onPress(oEvent) {
+            const oItem = oEvent.getSource();
+            const oRouter = this.getOwnerComponent().getRouter();
+            const oContext = oItem.getBindingContext("odatav2");
+
+            oRouter.navTo("product", {
+                productID: oContext.getProperty("ID")
+            });
+        },
+
         async showProductDialog(oEvent) {
             if(this.oProductDialog === undefined || this.oProductDialog === null) {
                 this.oProductDialog = await this.loadFragment({

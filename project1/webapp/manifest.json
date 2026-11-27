@@ -117,12 +117,28 @@
           "name": "tab",
           "pattern": "tab/{tabKey}",
           "target": "TargetMain"
+        },
+        {
+          "name": "product",
+          "pattern": "product/{productID}",
+          "target": "TargetProduct"
         }
       ],
       "targets": {
         "TargetMain": {
           "id": "Main",
           "name": "Main"
+        },
+        "TargetProduct": {
+          "id": "Product",
+          "name": "Product"
+        },
+        "TargetJSON": {
+          "id": "RecordTableJSON",
+          "name": "tables.RecordTableJSON",
+          "parent": "TargetMain",
+          "controlId": "jsonTab",
+          "controlAggregation": "content"
         },
         "TargetV2": {
           "id": "ProductTableV2",
