@@ -1,22 +1,27 @@
 sap.ui.define([
-    "project1/controller/BaseController",
-    "sap/ui/core/routing/History"
-], (BaseController, History ) => { 
+    "project1/controller/BaseController"
+], (BaseController) => { 
     "use strict"; 
 
     return BaseController.extend("project1.controller.Product", {
 
-        onNavBack() {
-            const oHistory = History.getInstance();
-			const sPreviousHash = oHistory.getPreviousHash();
+        onInit() {
+            const oRouter = this.getOwnerComponent().getRouter();
 
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				const oRouter = this.getOwnerComponent().getRouter();
-				oRouter.navTo("home", {}, true);
-			}
+            oRouter.getRoute("product").attachMatched(this._onObjectMatched, this);
+        },
+
+        _onObjectMatched(oEvent) {
+            const sProductID = oEvent.getParameter("arguments").productID;
+            const sPath = `/Products(${sProductID})`;
+
+            this.getView().bindElement({
+                path: sPath,
+                model: "odatav2",
+                parameters: {
+                    expand: "Supplier"
+                }
+            });
         }
-
     });
 });
